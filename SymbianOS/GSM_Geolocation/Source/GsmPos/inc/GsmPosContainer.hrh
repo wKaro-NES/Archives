@@ -1,0 +1,30 @@
+/*
+========================================================================
+ Name        : GsmPosContainer.hrh
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+enum TGsmPosContainerViewCommands
+	{
+	EGsmPosContainerViewSatelitte_infoMenuItemCommand = 0x6000,
+	EGsmPosContainerViewIncreaseMenuItemCommand,
+	EGsmPosContainerViewDecreaseMenuItemCommand,
+	EGsmPosContainerViewSelect_cell_idMenuItemCommand,
+	EGsmPosContainerViewSelect_cell_id_rectangleMenuItemCommand,
+	EGsmPosContainerViewConnectMenuItemCommand,
+	EGsmPosContainerViewShow_connected_devicesMenuItemCommand,
+	EGsmPosContainerViewListenMenuItemCommand,
+	EGsmPosContainerViewLocal_mapMenuItemCommand,
+	EGsmPosContainerViewLocal_map_withou_fillMenuItemCommand,
+	EGsmPosContainerViewShow_GPS_positionMenuItemCommand,
+	EGsmPosContainerViewHide_GPS_positionMenuItemCommand,
+	EGsmPosContainerViewGoogle_mapMenuItemCommand,
+	EGsmPosContainerViewLocal_mapMenuItem1Command
+	};
+enum TGsmPosContainerViewControls
+	{
+	EGsmPosContainerViewIntegerEditor1 = 1,
+	EGsmPosContainerViewConfQuery1
+	};

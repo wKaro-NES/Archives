@@ -1,0 +1,14 @@
+/*
+========================================================================
+ Name        : GsmPos.l01
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: UK English (01)
+#define STR_GsmPosApplication_2 ""
+#define STR_GsmPosApplication_3 ""
+#define STR_GsmPosApplication_4 "GsmPos (EN)"
+#define STR_GsmPosApplication_5 "GsmPos"
+#define STR_GsmPosApplication_1 ""

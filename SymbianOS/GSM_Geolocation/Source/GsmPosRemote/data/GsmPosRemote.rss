@@ -1,0 +1,98 @@
+/*
+========================================================================
+ Name        : GsmPosRemote.rss
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+NAME GSMP
+
+#include <avkon.rsg>
+#include <avkon.rh>
+#include <eikon.rh>
+#include <appinfo.rh>
+#include "GsmPosRemote.hrh"
+#include "GsmPosRemote.loc"
+
+RESOURCE RSS_SIGNATURE
+	{
+	}
+RESOURCE TBUF
+	{
+	buf = "GsmPosRemote";
+	}
+RESOURCE EIK_APP_INFO r_application_gsm_pos_remote_app_ui
+	{
+	cba = R_AVKON_SOFTKEYS_OPTIONS_EXIT;
+	status_pane = r_application_status_pane;
+	menubar = r_application_options_menu;
+	}
+RESOURCE STATUS_PANE_APP_MODEL r_application_status_pane
+	{
+	}
+RESOURCE MENU_BAR r_application_options_menu
+	{titles =
+			{
+			MENU_TITLE
+				{
+				menu_pane = r_application_menu_pane1_menu_pane;
+				}
+			};
+
+	}
+RESOURCE LOCALISABLE_APP_INFO r_localisable_app_info
+	{
+	short_caption = STR_GsmPosRemoteApplication_5;
+	caption_and_icon = CAPTION_AND_ICON_INFO
+		{
+		caption = STR_GsmPosRemoteApplication_4;
+
+		number_of_icons = 1;
+		icon_file = "\\resource\\apps\\GsmPosRemote_aif.mif";
+		};
+	}
+
+RESOURCE MENU_PANE r_application_menu_pane1_menu_pane
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			cascade = r_application_menu_pane2;
+			txt = STR_GsmPosRemoteApplication_6;
+			}
+		};
+	}
+RESOURCE MENU_PANE r_application_menu_pane2
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			command = EGsmPosRemoteApplicationPingMenuItemCommand;
+			txt = STR_GsmPosRemoteApplication_7;
+			}
+		};
+	}
+
+RESOURCE DIALOG r_application_conf_query1
+	{
+	flags = EAknGeneralQueryFlags;
+	buttons = R_AVKON_SOFTKEYS_YES_NO;
+	items =
+		{
+		DLG_LINE
+			{
+			type = EAknCtQuery;
+			id = EGsmPosRemoteApplicationConfQuery1;
+			control = AVKON_CONFIRMATION_QUERY
+				{
+				layout = EConfirmationQueryLayout;
+				label = STR_GsmPosRemoteApplication_8;
+				};
+			}
+		};
+	}
+
+#include "GsmPosRemoteContainer.rssi"

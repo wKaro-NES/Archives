@@ -1,0 +1,15 @@
+/*
+========================================================================
+ Name        : GsmPosRemoteContainer.l01
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: UK English (01)
+#define STR_GsmPosRemoteAppUi_1 "Operator:"
+#define STR_GsmPosRemoteAppUi_11 "Cell ID (CI):"
+#define STR_GsmPosRemoteAppUi_13 ""
+#define STR_GsmPosRemoteAppUi_5 ""
+#define STR_GsmPosRemoteAppUi_7 "Location Area Code(LA):"
+#define STR_GsmPosRemoteAppUi_9 ""

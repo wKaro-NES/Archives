@@ -1,0 +1,14 @@
+/*
+========================================================================
+ Name        : GsmPosContainer.loc
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#ifdef LANGUAGE_01
+#include "GsmPosContainer.l01"
+#endif
+#ifdef LANGUAGE_27
+#include "GsmPosContainer.l27"
+#endif

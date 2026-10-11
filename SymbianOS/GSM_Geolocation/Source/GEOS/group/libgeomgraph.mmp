@@ -1,0 +1,73 @@
+/*
+============================================================================
+ Name		: libgeomgraph.mmp
+ Author	  : w.karolik
+ Copyright   : Your copyright notice
+ Description : This is the project specification file for Geos.
+============================================================================
+*/
+
+TARGET		  libgeomgraph.lib
+TARGETTYPE	  stdlib 
+UID			 0x0 0x0
+
+SYSTEMINCLUDE   \epoc32\include
+
+#ifdef ENABLE_ABIV2_MODE
+  DEBUGGABLE_UDEBONLY
+#endif
+
+
+//Open C++
+SYSTEMINCLUDE   \epoc32\include\stdapis
+SYSTEMINCLUDE   \epoc32\include\stdapis\sys
+SYSTEMINCLUDE   \epoc32\include\stdapis\stlport 
+
+//Open C++
+//standard E32Main() not main()
+STATICLIBRARY  libcrt0.lib
+LIBRARY libc.lib 
+#ifdef EPOC32
+LIBRARY  libstdcpp.lib
+#else
+FIRSTLIB ../udeb/libstdcpp.lib
+STATICLIBRARY    eexe.lib 
+#endif
+
+LIBRARY       euser.lib
+
+//This is required even if the wchar type is not used.
+OPTION CW -wchar_t on 
+MACRO  _WCHAR_T_DECLARED
+
+/*
+Ported: geos-3.1.1
+*/
+SYSTEMINCLUDE ..\geos\headers
+
+SOURCEPATH ..\geos\geomgraph	
+SOURCE		Depth.cpp
+SOURCE		DirectedEdge.cpp
+SOURCE		DirectedEdgeStar.cpp
+SOURCE		Edge.cpp
+SOURCE		EdgeEnd.cpp
+SOURCE		EdgeEndStar.cpp
+SOURCE		EdgeIntersection.cpp
+SOURCE		EdgeIntersectionList.cpp
+SOURCE		EdgeList.cpp
+SOURCE		EdgeNodingValidator.cpp
+SOURCE		EdgeRing.cpp
+SOURCE		GeometryGraph.cpp
+SOURCE		GraphComponent.cpp
+SOURCE		Label.cpp
+SOURCE		Node.cpp
+SOURCE		NodeFactory.cpp
+SOURCE		NodeMap.cpp
+SOURCE		PlanarGraph.cpp
+SOURCE		Position.cpp
+SOURCE		Quadrant.cpp
+SOURCE		TopologyLocation.cpp
+
+
+SOURCEPATH ..\src
+SOURCE		DLL.cpp

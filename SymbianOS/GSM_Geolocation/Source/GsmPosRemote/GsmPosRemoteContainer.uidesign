@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<designerData version="1.1.0">
+  <componentManifest>
+    <manifestEntry id="com.nokia.sdt.series60.DefaultAppUi" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.DesignTimeContainer" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CommonBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CCoeControl" version="1.2.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.ContainerBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CEikLabel" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CCoeControlBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.ControlBase" version="1.0.0"/>
+  </componentManifest>
+  <property id="com.nokia.sdt.symbian.dm.RESOURCE_DIRECTORY_ID">data</property>
+  <property id="com.nokia.sdt.component.symbian.vendor">com.nokia.series60</property>
+  <property id="com.nokia.sdt.component.symbian.version">3.2.0</property>
+  <property id="com.nokia.sdt.symbian.dm.COMPONENT_PROVIDER">com.nokia.sdt.component.symbian.Symbian-Provider</property>
+  <property id="com.nokia.sdt.symbian.dm.INCLUDE_DIRECTORY_ID">inc</property>
+  <property id="com.nokia.sdt.symbian.dm.SOURCE_DIRECTORY_ID">src</property>
+  <property id="com.nokia.sdt.symbian.dm.SOURCEGEN_PROVIDER">com.nokia.sdt.sourcegen.Symbian-Provider</property>
+  <property id="com.nokia.sdt.symbian.dm.BUILD_DIRECTORY_ID">group</property>
+  <component id="com.nokia.sdt.series60.DefaultAppUi">
+    <property id="className">CGsmPosRemoteAppUi</property>
+    <compoundProperty id="location">
+      <property id="x">51</property>
+      <property id="y">44</property>
+    </compoundProperty>
+    <property id="name">GsmPosRemoteAppUi</property>
+    <compoundProperty id="size">
+      <property id="width">240</property>
+      <property id="height">320</property>
+    </compoundProperty>
+    <component id="com.nokia.sdt.series60.CCoeControl">
+      <compoundProperty id="location">
+        <property id="y">66</property>
+      </compoundProperty>
+      <property id="className">CGsmPosRemoteContainer</property>
+      <property id="name">GsmPosRemoteContainer</property>
+      <compoundProperty id="size">
+        <property id="width">240</property>
+        <property id="height">222</property>
+      </compoundProperty>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">5</property>
+          <property id="y">7</property>
+        </compoundProperty>
+        <property id="name">operator</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_1</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">148</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">50</property>
+          <property id="y">35</property>
+        </compoundProperty>
+        <property id="name">operator_val</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_5</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">179</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">5</property>
+          <property id="y">67</property>
+        </compoundProperty>
+        <property id="name">lac</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_7</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">227</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">50</property>
+          <property id="y">95</property>
+        </compoundProperty>
+        <property id="name">lac_val</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_9</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">194</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">5</property>
+          <property id="y">131</property>
+        </compoundProperty>
+        <property id="name">ci</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_11</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">208</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+      <component id="com.nokia.sdt.series60.CEikLabel">
+        <compoundProperty id="location">
+          <property id="x">50</property>
+          <property id="y">165</property>
+        </compoundProperty>
+        <property id="name">ci_val</property>
+        <property id="text" type="i18n">STR_GsmPosRemoteAppUi_13</property>
+        <property id="alignment">EEikLabelAlignHLeft</property>
+        <compoundProperty id="size">
+          <property id="width">192</property>
+          <property id="height">27</property>
+        </compoundProperty>
+      </component>
+    </component>
+  </component>
+  <stringBundle>
+    <stringTable language="LANG_English">
+      <string id="STR_GsmPosRemoteAppUi_1">Operator:</string>
+      <string id="STR_GsmPosRemoteAppUi_5"/>
+      <string id="STR_GsmPosRemoteAppUi_7">Location Area Code(LA):</string>
+      <string id="STR_GsmPosRemoteAppUi_9"/>
+      <string id="STR_GsmPosRemoteAppUi_11">Cell ID (CI):</string>
+      <string id="STR_GsmPosRemoteAppUi_13"/>
+    </stringTable>
+  </stringBundle>
+  <macroTable/>
+  <sourceMappingState>
+    <resourceMappings>
+      <resourceMapping instanceName="operator_val">r_gsm_pos_remote_container_operator_val</resourceMapping>
+      <resourceMapping instanceName="operator">r_gsm_pos_remote_container_operator</resourceMapping>
+      <resourceMapping instanceName="ci_val">r_gsm_pos_remote_container_ci_val</resourceMapping>
+      <resourceMapping instanceName="lac_val">r_gsm_pos_remote_container_lac_val</resourceMapping>
+      <resourceMapping instanceName="ci">r_gsm_pos_remote_container_ci</resourceMapping>
+      <resourceMapping instanceName="lac">r_gsm_pos_remote_container_lac</resourceMapping>
+    </resourceMappings>
+    <enumMappings>
+      <enumMapping instanceName="ci" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+      <enumMapping instanceName="pingMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosRemoteAppUiPingMenuItemCommand</enumMapping>
+      <enumMapping instanceName="ci_val" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+      <enumMapping instanceName="lac_val" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+      <enumMapping instanceName="operator" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+      <enumMapping instanceName="lac" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="ci" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="operator_val" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="lac" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+      <enumMapping instanceName="lac_val" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="ci_val" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="operator" propertyId="font">EEikLabelFontNormal</enumMapping>
+      <enumMapping instanceName="operator_val" propertyId="alignment">EEikLabelAlignHLeft</enumMapping>
+    </enumMappings>
+    <arrayMappings/>
+  </sourceMappingState>
+  <generatedFiles>
+    <file>inc/gsmposremotecontainer.h</file>
+    <file>src/gsmposremotecontainer.cpp</file>
+    <file>data/gsmposremote.rss</file>
+    <file>data/gsmposremotecontainer.rssi</file>
+    <file>inc/gsmposremote.hrh</file>
+    <file>inc/gsmposremotecontainer.hrh</file>
+    <file>data/gsmposremote.loc</file>
+    <file>data/gsmposremote.l01</file>
+    <file>data/gsmposremotecontainer.loc</file>
+    <file>data/gsmposremotecontainer.l01</file>
+  </generatedFiles>
+</designerData>

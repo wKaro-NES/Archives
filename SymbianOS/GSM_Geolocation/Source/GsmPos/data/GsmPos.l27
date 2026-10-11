@@ -1,0 +1,16 @@
+/*
+========================================================================
+ Name        : GsmPos.l27
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: Polish (27)
+CHARACTER_SET UTF8
+
+#define STR_GsmPosApplication_2 "Wyjście"
+#define STR_GsmPosApplication_3 ""
+#define STR_GsmPosApplication_4 "GsmPos (PL)"
+#define STR_GsmPosApplication_5 "GsmPos"
+#define STR_GsmPosApplication_1 "Opcje"

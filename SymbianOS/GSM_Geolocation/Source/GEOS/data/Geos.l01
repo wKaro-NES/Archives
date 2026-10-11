@@ -1,0 +1,11 @@
+/*
+========================================================================
+ Name        : Geos.l01
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: UK English (01)
+#define STR_GsmPosRemoteApplication_4 "Geos"
+#define STR_GsmPosRemoteApplication_5 "Geos"

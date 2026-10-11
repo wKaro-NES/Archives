@@ -1,0 +1,11 @@
+/*
+========================================================================
+ Name        : Geos.loc
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#ifdef LANGUAGE_01
+#include "Geos.l01"
+#endif

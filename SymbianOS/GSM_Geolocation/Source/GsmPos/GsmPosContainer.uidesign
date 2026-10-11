@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<designerData version="1.1.0">
+  <componentManifest>
+    <manifestEntry id="com.nokia.sdt.series60.CAknView" version="1.2.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.DesignTimeContainer" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CommonBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.StatusPane" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.ControlBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.StatusPaneTitle" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.StatusPaneTitleBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CBA" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CBABase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CCoeControl" version="1.2.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.ContainerBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CEikImage" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.symbian.CEikAlignedBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CCoeControlBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.MenuBar" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.MenuBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.MenuPane" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.MenuItem" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.MenuItemBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.SingleLineDataQuery" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.SingleLineDataQueryBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.NonLayoutBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CAknIntegerEdwin" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.CEikEdwinBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.EditorBase" version="1.0.0"/>
+    <manifestEntry id="com.nokia.sdt.series60.ConfirmationQuery" version="1.0.0"/>
+  </componentManifest>
+  <property id="com.nokia.sdt.symbian.dm.RESOURCE_DIRECTORY_ID">data</property>
+  <property id="com.nokia.sdt.component.symbian.vendor">com.nokia.series60</property>
+  <property id="com.nokia.sdt.component.symbian.version">3.2.0</property>
+  <property id="com.nokia.sdt.symbian.dm.COMPONENT_PROVIDER">com.nokia.sdt.component.symbian.Symbian-Provider</property>
+  <property id="com.nokia.sdt.symbian.dm.INCLUDE_DIRECTORY_ID">inc</property>
+  <property id="com.nokia.sdt.symbian.dm.SOURCE_DIRECTORY_ID">src</property>
+  <property id="com.nokia.sdt.symbian.dm.SOURCEGEN_PROVIDER">com.nokia.sdt.sourcegen.Symbian-Provider</property>
+  <property id="com.nokia.sdt.symbian.dm.BUILD_DIRECTORY_ID">group</property>
+  <component id="com.nokia.sdt.series60.CAknView">
+    <property id="className">CGsmPosContainerView</property>
+    <compoundProperty id="location">
+      <property id="x">51</property>
+      <property id="y">44</property>
+    </compoundProperty>
+    <property id="optionsMenu" type="componentRef">optionsMenu</property>
+    <property id="name">GsmPosContainerView</property>
+    <compoundProperty id="size">
+      <property id="width">240</property>
+      <property id="height">320</property>
+    </compoundProperty>
+    <component id="com.nokia.sdt.series60.StatusPane">
+      <compoundProperty id="location">
+        <property id="x">20</property>
+      </compoundProperty>
+      <property id="name">statusPane</property>
+      <compoundProperty id="size">
+        <property id="width">204</property>
+        <property id="height">63</property>
+      </compoundProperty>
+      <component id="com.nokia.sdt.series60.StatusPaneTitle">
+        <compoundProperty id="location">
+          <property id="x">56</property>
+        </compoundProperty>
+        <property id="name">title</property>
+        <property id="titleText" type="i18n">STR_GsmPosContainerView_4</property>
+        <compoundProperty id="size">
+          <property id="width">148</property>
+          <property id="height">43</property>
+        </compoundProperty>
+        <compoundProperty id="image"/>
+      </component>
+    </component>
+    <component id="com.nokia.sdt.series60.CBA">
+      <compoundProperty id="location">
+        <property id="y">288</property>
+      </compoundProperty>
+      <compoundProperty id="info">
+        <property id="leftText" type="i18n">STR_GsmPosContainerView_1</property>
+        <property id="rightText" type="i18n">STR_GsmPosContainerView_2</property>
+        <property id="middleText" type="i18n">STR_GsmPosContainerView_3</property>
+      </compoundProperty>
+      <property id="name">controlPane</property>
+      <compoundProperty id="size">
+        <property id="width">240</property>
+        <property id="height">32</property>
+      </compoundProperty>
+    </component>
+    <component id="com.nokia.sdt.series60.CCoeControl">
+      <compoundProperty id="location">
+        <property id="y">66</property>
+      </compoundProperty>
+      <property id="className">CGsmPosContainer</property>
+      <property id="name">GsmPosContainer</property>
+      <compoundProperty id="size">
+        <property id="width">240</property>
+        <property id="height">222</property>
+      </compoundProperty>
+      <component id="com.nokia.sdt.series60.CEikImage">
+        <compoundProperty id="location">
+          <property id="x">0</property>
+          <property id="y">0</property>
+        </compoundProperty>
+        <property id="name">image1</property>
+        <compoundProperty id="size">
+          <property id="width">240</property>
+          <property id="height">230</property>
+        </compoundProperty>
+        <compoundProperty id="image"/>
+      </component>
+    </component>
+    <component id="com.nokia.sdt.series60.MenuBar">
+      <compoundProperty id="location">
+        <property id="x">6</property>
+        <property id="y">41</property>
+      </compoundProperty>
+      <property id="name">optionsMenu</property>
+      <compoundProperty id="size">
+        <property id="height">247</property>
+        <property id="width">228</property>
+      </compoundProperty>
+      <component id="com.nokia.sdt.series60.MenuPane">
+        <compoundProperty id="location"/>
+        <property id="name">menuPane1</property>
+        <compoundProperty id="size">
+          <property id="height">247</property>
+          <property id="width">228</property>
+        </compoundProperty>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">2</property>
+          </compoundProperty>
+          <property id="name">showMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_7</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <component id="com.nokia.sdt.series60.MenuPane">
+            <compoundProperty id="location">
+              <property id="x">213</property>
+            </compoundProperty>
+            <property id="name">menuPane2</property>
+            <compoundProperty id="size">
+              <property id="width">152</property>
+              <property id="height">137</property>
+            </compoundProperty>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">2</property>
+              </compoundProperty>
+              <property id="name">select_cell_id_rectangleMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_6</property>
+              <compoundProperty id="size">
+                <property id="width">137</property>
+                <property id="height">24</property>
+              </compoundProperty>
+              <eventBinding id="selected" handlerDisplay="HandleSelect_cell_id_rectangleMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleSelect_cell_id_rectangleMenuItemSelectedL(TInt))"/>
+            </component>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">28</property>
+              </compoundProperty>
+              <property id="name">select_cell_idMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_18</property>
+              <compoundProperty id="size">
+                <property id="width">137</property>
+                <property id="height">24</property>
+              </compoundProperty>
+              <eventBinding id="selected" handlerDisplay="HandleSelect_cell_idMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleSelect_cell_idMenuItemSelectedL(TInt))"/>
+            </component>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">54</property>
+              </compoundProperty>
+              <property id="name">local_mapMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_16</property>
+              <compoundProperty id="size">
+                <property id="width">137</property>
+                <property id="height">24</property>
+              </compoundProperty>
+              <eventBinding id="selected" handlerDisplay="HandleLocal_mapMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleLocal_mapMenuItemSelectedL(TInt))"/>
+            </component>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">80</property>
+              </compoundProperty>
+              <property id="name">local_map_withou_fillMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_17</property>
+              <compoundProperty id="size">
+                <property id="width">137</property>
+                <property id="height">24</property>
+              </compoundProperty>
+              <eventBinding id="selected" handlerDisplay="HandleLocal_map_withou_fillMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleLocal_map_withou_fillMenuItemSelectedL(TInt))"/>
+            </component>
+          </component>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">32</property>
+          </compoundProperty>
+          <property id="name">get_coverage_mapMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_20</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <component id="com.nokia.sdt.series60.MenuPane">
+            <compoundProperty id="location">
+              <property id="x">213</property>
+            </compoundProperty>
+            <property id="name">menuPane5</property>
+            <compoundProperty id="size"/>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">2</property>
+              </compoundProperty>
+              <property id="name">google_mapMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_21</property>
+              <compoundProperty id="size"/>
+              <eventBinding id="selected" handlerDisplay="HandleGoogle_mapMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleGoogle_mapMenuItemSelectedL(TInt))"/>
+            </component>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">4</property>
+              </compoundProperty>
+              <property id="name">local_mapMenuItem1</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_22</property>
+              <compoundProperty id="size"/>
+              <eventBinding id="selected" handlerDisplay="HandleLocal_mapMenuItem1SelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleLocal_mapMenuItem1SelectedL(TInt))"/>
+            </component>
+          </component>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">62</property>
+          </compoundProperty>
+          <property id="name">zoomMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_10</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <component id="com.nokia.sdt.series60.MenuPane">
+            <compoundProperty id="location">
+              <property id="x">213</property>
+            </compoundProperty>
+            <property id="name">menuPane3</property>
+            <compoundProperty id="size"/>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">2</property>
+              </compoundProperty>
+              <property id="name">increaseMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_11</property>
+              <compoundProperty id="size"/>
+              <eventBinding id="selected" handlerDisplay="HandleIncreaseMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleIncreaseMenuItemSelectedL(TInt))"/>
+            </component>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">4</property>
+              </compoundProperty>
+              <property id="name">decreaseMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_12</property>
+              <compoundProperty id="size"/>
+              <eventBinding id="selected" handlerDisplay="HandleDecreaseMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleDecreaseMenuItemSelectedL(TInt))"/>
+            </component>
+          </component>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">92</property>
+          </compoundProperty>
+          <property id="name">show_GPS_positionMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_14</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <eventBinding id="selected" handlerDisplay="HandleShow_GPS_positionMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleShow_GPS_positionMenuItemSelectedL(TInt))"/>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">122</property>
+          </compoundProperty>
+          <property id="name">hide_GPS_positionMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_19</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <eventBinding id="selected" handlerDisplay="HandleHide_GPS_positionMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleHide_GPS_positionMenuItemSelectedL(TInt))"/>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">152</property>
+          </compoundProperty>
+          <property id="name">satelitte_infoMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_5</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <eventBinding id="selected" handlerDisplay="HandleSatelitte_infoMenuItemSelectedL" handlerSymbol="cpp@src//GsmPosContainerView.cpp/function(CGsmPosContainerView::HandleSatelitte_infoMenuItemSelectedL(TInt))"/>
+        </component>
+        <component id="com.nokia.sdt.series60.MenuItem">
+          <compoundProperty id="location">
+            <property id="x">5</property>
+            <property id="y">182</property>
+          </compoundProperty>
+          <property id="name">bluetoothMenuItem</property>
+          <property id="text" type="i18n">STR_GsmPosContainerView_8</property>
+          <compoundProperty id="size">
+            <property id="width">213</property>
+            <property id="height">28</property>
+          </compoundProperty>
+          <component id="com.nokia.sdt.series60.MenuPane">
+            <compoundProperty id="location">
+              <property id="x">213</property>
+            </compoundProperty>
+            <property id="name">menuPane4</property>
+            <compoundProperty id="size"/>
+            <component id="com.nokia.sdt.series60.MenuItem">
+              <compoundProperty id="location">
+                <property id="x">5</property>
+                <property id="y">2</property>
+              </compoundProperty>
+              <property id="name">show_connected_devicesMenuItem</property>
+              <property id="text" type="i18n">STR_GsmPosContainerView_15</property>
+              <compoundProperty id="size"/>
+            </component>
+          </component>
+        </component>
+      </component>
+    </component>
+    <component id="com.nokia.sdt.series60.SingleLineDataQuery">
+      <property id="type">ENumberLayout</property>
+      <compoundProperty id="location">
+        <property id="y">189</property>
+      </compoundProperty>
+      <property id="name">dataQuery1</property>
+      <property id="text" type="i18n">STR_GsmPosContainerView_9</property>
+      <compoundProperty id="size">
+        <property id="width">240</property>
+        <property id="height">131</property>
+      </compoundProperty>
+      <component id="com.nokia.sdt.series60.CAknIntegerEdwin">
+        <compoundProperty id="location">
+          <property id="x">19</property>
+          <property id="y">40</property>
+        </compoundProperty>
+        <property id="name">integerEditor1</property>
+        <compoundProperty id="size">
+          <property id="width">200</property>
+          <property id="height">34</property>
+        </compoundProperty>
+      </component>
+    </component>
+    <component id="com.nokia.sdt.series60.ConfirmationQuery">
+      <compoundProperty id="location">
+        <property id="x">0</property>
+        <property id="y">186</property>
+      </compoundProperty>
+      <property id="name">confQuery1</property>
+      <property id="text" type="i18n">STR_GsmPosContainerView_13</property>
+      <compoundProperty id="size">
+        <property id="width">240</property>
+        <property id="height">134</property>
+      </compoundProperty>
+    </component>
+  </component>
+  <stringBundle>
+    <stringTable language="LANG_English">
+      <string id="STR_GsmPosContainerView_1"/>
+      <string id="STR_GsmPosContainerView_2"/>
+      <string id="STR_GsmPosContainerView_3"/>
+      <string id="STR_GsmPosContainerView_4">GsmPos</string>
+      <string id="STR_GsmPosContainerView_5">Informacja o satelitach</string>
+      <string id="STR_GsmPosContainerView_7">Mapa z lokalizacją</string>
+      <string id="STR_GsmPosContainerView_9">Podaj promień (metry)</string>
+      <string id="STR_GsmPosContainerView_10">Zoom</string>
+      <string id="STR_GsmPosContainerView_11">+</string>
+      <string id="STR_GsmPosContainerView_12">-</string>
+      <string id="STR_GsmPosContainerView_18">Google Map (punkty)</string>
+      <string id="STR_GsmPosContainerView_6">Google Map</string>
+      <string id="STR_GsmPosContainerView_8">Bluetooth</string>
+      <string id="STR_GsmPosContainerView_15">Podłączone terminale</string>
+      <string id="STR_GsmPosContainerView_13">Czy chcesz użyć ostatniej znanej pozycji GPS</string>
+      <string id="STR_GsmPosContainerView_16">Schemat</string>
+      <string id="STR_GsmPosContainerView_17">Schemat (punkty)</string>
+      <string id="STR_GsmPosContainerView_14">Pokaż pozycję GPS</string>
+      <string id="STR_GsmPosContainerView_19">Ukryj pozycję GPS</string>
+      <string id="STR_GsmPosContainerView_20">Mapa pokrycia BTS</string>
+      <string id="STR_GsmPosContainerView_21">Google Map</string>
+      <string id="STR_GsmPosContainerView_22">Schemat</string>
+    </stringTable>
+    <stringTable language="LANG_Polish">
+      <string id="STR_GsmPosContainerView_1"/>
+      <string id="STR_GsmPosContainerView_2"/>
+      <string id="STR_GsmPosContainerView_3"/>
+      <string id="STR_GsmPosContainerView_4">GsmPos</string>
+      <string id="STR_GsmPosContainerView_5">Informacja o satelitach</string>
+      <string id="STR_GsmPosContainerView_7">Mapa z lokalizacją</string>
+      <string id="STR_GsmPosContainerView_9">Podaj promień (metry)</string>
+      <string id="STR_GsmPosContainerView_10">Zoom</string>
+      <string id="STR_GsmPosContainerView_11">+</string>
+      <string id="STR_GsmPosContainerView_12">-</string>
+      <string id="STR_GsmPosContainerView_18">Google Map (punkty)</string>
+      <string id="STR_GsmPosContainerView_6">Google Map</string>
+      <string id="STR_GsmPosContainerView_8">Bluetooth</string>
+      <string id="STR_GsmPosContainerView_15">Podłączone terminale</string>
+      <string id="STR_GsmPosContainerView_13">Czy chcesz użyć ostatniej znanej pozycji GPS</string>
+      <string id="STR_GsmPosContainerView_16">Schemat</string>
+      <string id="STR_GsmPosContainerView_17">Schemat (punkty)</string>
+      <string id="STR_GsmPosContainerView_14">Pokaż pozycję GPS</string>
+      <string id="STR_GsmPosContainerView_19">Ukryj pozycję GPS</string>
+      <string id="STR_GsmPosContainerView_20">Mapa pokrycia BTS</string>
+      <string id="STR_GsmPosContainerView_21">Google Map</string>
+      <string id="STR_GsmPosContainerView_22">Schemat</string>
+    </stringTable>
+  </stringBundle>
+  <macroTable/>
+  <sourceMappingState>
+    <resourceMappings>
+      <resourceMapping instanceName="title">r_gsm_pos_container_title_resource</resourceMapping>
+      <resourceMapping instanceName="optionsMenu">r_gsm_pos_container_options_menu</resourceMapping>
+      <resourceMapping instanceName="GsmPosContainerView">r_gsm_pos_container_gsm_pos_container_view</resourceMapping>
+      <resourceMapping instanceName="menuPane4">r_gsm_pos_container_menu_pane4</resourceMapping>
+      <resourceMapping instanceName="confQuery1">r_gsm_pos_container_conf_query1</resourceMapping>
+      <resourceMapping instanceName="dataQuery1">r_gsm_pos_container_data_query1</resourceMapping>
+      <resourceMapping instanceName="menuPane3">r_gsm_pos_container_menu_pane3</resourceMapping>
+      <resourceMapping instanceName="menuPane2">r_gsm_pos_container_menu_pane2</resourceMapping>
+      <resourceMapping instanceName="statusPane">r_gsm_pos_container_status_pane</resourceMapping>
+      <resourceMapping instanceName="menuPane5">r_gsm_pos_container_menu_pane5</resourceMapping>
+      <resourceMapping instanceName="menuPane1">r_gsm_pos_container_menu_pane1_menu_pane</resourceMapping>
+    </resourceMappings>
+    <enumMappings>
+      <enumMapping instanceName="title" propertyId="" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_CONTROL_TYPE">EAknCtTitlePane</enumMapping>
+      <enumMapping instanceName="satelitte_infoMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewSatelitte_infoMenuItemCommand</enumMapping>
+      <enumMapping instanceName="google_mapMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewGoogle_mapMenuItemCommand</enumMapping>
+      <enumMapping instanceName="hide_GPS_positionMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewHide_GPS_positionMenuItemCommand</enumMapping>
+      <enumMapping instanceName="select_cell_idMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewSelect_cell_idMenuItemCommand</enumMapping>
+      <enumMapping instanceName="listenMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewListenMenuItemCommand</enumMapping>
+      <enumMapping instanceName="confQuery1" propertyId="" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_DIALOG_LINE_ID">EGsmPosContainerViewConfQuery1</enumMapping>
+      <enumMapping instanceName="dataQuery1" propertyId="[parent].type">ENumberLayout</enumMapping>
+      <enumMapping instanceName="GsmPosContainerView" propertyId="" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_VIEW_UID">EGsmPosContainerViewId</enumMapping>
+      <enumMapping instanceName="controlPane" propertyId="leftId" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EAknSoftkeyOptions</enumMapping>
+      <enumMapping instanceName="controlPane" propertyId="rightId" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EAknSoftkeyExit</enumMapping>
+      <enumMapping instanceName="title" propertyId="" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_STATUS_PANE_ID">EEikStatusPaneUidTitle</enumMapping>
+      <enumMapping instanceName="local_mapMenuItem1" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewLocal_mapMenuItem1Command</enumMapping>
+      <enumMapping instanceName="show_GPS_positionMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewShow_GPS_positionMenuItemCommand</enumMapping>
+      <enumMapping instanceName="select_cell_id_rectangleMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewSelect_cell_id_rectangleMenuItemCommand</enumMapping>
+      <enumMapping instanceName="decreaseMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewDecreaseMenuItemCommand</enumMapping>
+      <enumMapping instanceName="show_connected_devicesMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewShow_connected_devicesMenuItemCommand</enumMapping>
+      <enumMapping instanceName="integerEditor1" propertyId="" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_DIALOG_LINE_ID">EGsmPosContainerViewIntegerEditor1</enumMapping>
+      <enumMapping instanceName="controlPane" propertyId="middleId" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EAknSoftkeyEmpty</enumMapping>
+      <enumMapping instanceName="increaseMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewIncreaseMenuItemCommand</enumMapping>
+      <enumMapping instanceName="local_map_withou_fillMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewLocal_map_withou_fillMenuItemCommand</enumMapping>
+      <enumMapping instanceName="local_mapMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewLocal_mapMenuItemCommand</enumMapping>
+      <enumMapping instanceName="connectMenuItem" propertyId="command" nameAlgorithm="com.nokia.sdt.component.symbian.NAME_ALG_COMMANDS">EGsmPosContainerViewConnectMenuItemCommand</enumMapping>
+    </enumMappings>
+    <arrayMappings>
+      <arrayMapping instanceName="dataQuery1" propertyId="." memberId="items">
+        <arrayElement uniqueValue="EGsmPosContainerViewIntegerEditor1">integerEditor1</arrayElement>
+      </arrayMapping>
+    </arrayMappings>
+  </sourceMappingState>
+  <generatedFiles>
+    <file>inc/gsmposcontainerview.h</file>
+    <file>src/gsmposcontainerview.cpp</file>
+    <file>src/gsmposcontainer.cpp</file>
+    <file>inc/gsmposcontainer.h</file>
+    <file>data/gsmpos.rss</file>
+    <file>data/gsmposcontainer.rssi</file>
+    <file>inc/gsmpos.hrh</file>
+    <file>inc/gsmposcontainer.hrh</file>
+    <file>data/gsmpos.loc</file>
+    <file>data/gsmpos.l01</file>
+    <file>data/gsmpos.l27</file>
+    <file>data/gsmposcontainer.loc</file>
+    <file>data/gsmposcontainer.l01</file>
+    <file>data/gsmposcontainer.l27</file>
+  </generatedFiles>
+</designerData>

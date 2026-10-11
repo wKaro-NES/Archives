@@ -1,0 +1,19 @@
+/*
+========================================================================
+ Name        : GsmPosRemote.l01
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: UK English (01)
+CHARACTER_SET UTF8
+ 
+#define STR_GsmPosRemoteApplication_2 ""
+#define STR_GsmPosRemoteApplication_3 ""
+#define STR_GsmPosRemoteApplication_4 "GsmPosRemote"
+#define STR_GsmPosRemoteApplication_5 "GsmPosRemote"
+#define STR_GsmPosRemoteApplication_1 ""
+#define STR_GsmPosRemoteApplication_7 "Ping"
+#define STR_GsmPosRemoteApplication_6 "Bluetooth"
+#define STR_GsmPosRemoteApplication_8 "Jesteś pewien"

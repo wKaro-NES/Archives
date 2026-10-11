@@ -1,0 +1,12 @@
+/*
+========================================================================
+ Name        : GsmPosRemoteContainer.hrh
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+enum TGsmPosRemoteAppUiCommands
+	{
+	EGsmPosRemoteAppUiPingMenuItemCommand = 0x6000
+	};

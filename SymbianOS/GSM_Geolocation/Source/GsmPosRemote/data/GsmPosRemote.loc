@@ -1,0 +1,11 @@
+/*
+========================================================================
+ Name        : GsmPosRemote.loc
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#ifdef LANGUAGE_01
+#include "GsmPosRemote.l01"
+#endif

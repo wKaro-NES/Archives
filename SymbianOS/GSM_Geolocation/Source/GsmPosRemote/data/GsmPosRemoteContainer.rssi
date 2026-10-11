@@ -1,0 +1,41 @@
+/*
+========================================================================
+ Name        : GsmPosRemoteContainer.rssi
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#include "GsmPosRemoteContainer.hrh"
+#include "GsmPosRemoteContainer.loc"
+
+RESOURCE LABEL r_gsm_pos_remote_container_operator
+	{
+	txt = STR_GsmPosRemoteAppUi_1;
+	horiz_align = EEikLabelAlignHLeft;
+	}
+RESOURCE LABEL r_gsm_pos_remote_container_operator_val
+	{
+	txt = STR_GsmPosRemoteAppUi_5;
+	horiz_align = EEikLabelAlignHLeft;
+	}
+RESOURCE LABEL r_gsm_pos_remote_container_lac
+	{
+	txt = STR_GsmPosRemoteAppUi_7;
+	horiz_align = EEikLabelAlignHLeft;
+	}
+RESOURCE LABEL r_gsm_pos_remote_container_lac_val
+	{
+	txt = STR_GsmPosRemoteAppUi_9;
+	horiz_align = EEikLabelAlignHLeft;
+	}
+RESOURCE LABEL r_gsm_pos_remote_container_ci
+	{
+	txt = STR_GsmPosRemoteAppUi_11;
+	horiz_align = EEikLabelAlignHLeft;
+	}
+RESOURCE LABEL r_gsm_pos_remote_container_ci_val
+	{
+	txt = STR_GsmPosRemoteAppUi_13;
+	horiz_align = EEikLabelAlignHLeft;
+	}

@@ -1,0 +1,195 @@
+/*
+========================================================================
+ Name        : GsmPosContainer.rssi
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#include "GsmPosContainer.hrh"
+#include "GsmPosContainer.loc"
+
+RESOURCE AVKON_VIEW r_gsm_pos_container_gsm_pos_container_view
+	{
+	cba = R_AVKON_SOFTKEYS_OPTIONS_EXIT;
+	menubar = r_gsm_pos_container_options_menu;
+	toolbar = 0;
+	}
+RESOURCE MENU_BAR r_gsm_pos_container_options_menu
+	{titles =
+			{
+			MENU_TITLE
+				{
+				menu_pane = r_gsm_pos_container_menu_pane1_menu_pane;
+				}
+			};
+
+	}
+RESOURCE STATUS_PANE_APP_MODEL r_gsm_pos_container_status_pane
+	{
+	panes =
+		{
+		SPANE_PANE
+			{
+			id = EEikStatusPaneUidTitle;
+			type = EAknCtTitlePane;
+			resource = r_gsm_pos_container_title_resource;
+			}
+		};
+	}
+RESOURCE TITLE_PANE r_gsm_pos_container_title_resource
+	{
+	txt = STR_GsmPosContainerView_4;
+	}
+RESOURCE MENU_PANE r_gsm_pos_container_menu_pane1_menu_pane
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			cascade = r_gsm_pos_container_menu_pane2;
+			txt = STR_GsmPosContainerView_7;
+			},
+		MENU_ITEM
+			{
+			cascade = r_gsm_pos_container_menu_pane5;
+			txt = STR_GsmPosContainerView_20;
+			},
+		MENU_ITEM
+			{
+			cascade = r_gsm_pos_container_menu_pane3;
+			txt = STR_GsmPosContainerView_10;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewShow_GPS_positionMenuItemCommand;
+			txt = STR_GsmPosContainerView_14;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewHide_GPS_positionMenuItemCommand;
+			txt = STR_GsmPosContainerView_19;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewSatelitte_infoMenuItemCommand;
+			txt = STR_GsmPosContainerView_5;
+			},
+		MENU_ITEM
+			{
+			cascade = r_gsm_pos_container_menu_pane4;
+			txt = STR_GsmPosContainerView_8;
+			}
+		};
+	}
+RESOURCE MENU_PANE r_gsm_pos_container_menu_pane2
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewSelect_cell_id_rectangleMenuItemCommand;
+			txt = STR_GsmPosContainerView_6;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewSelect_cell_idMenuItemCommand;
+			txt = STR_GsmPosContainerView_18;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewLocal_mapMenuItemCommand;
+			txt = STR_GsmPosContainerView_16;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewLocal_map_withou_fillMenuItemCommand;
+			txt = STR_GsmPosContainerView_17;
+			}
+		};
+	}
+RESOURCE DIALOG r_gsm_pos_container_data_query1
+	{
+	flags = EAknGeneralQueryFlags;
+	buttons = R_AVKON_SOFTKEYS_OK_CANCEL;
+	items =
+		{
+		DLG_LINE
+			{
+			type = EAknCtQuery;
+			id = EGsmPosContainerViewIntegerEditor1;
+			control = AVKON_DATA_QUERY
+				{
+				layout = ENumberLayout;
+				label = STR_GsmPosContainerView_9;
+				control = AVKON_INTEGER_EDWIN
+					{
+					unset_value = 0;
+					min = -2147483647;
+					max = 2147483647;
+					};
+				};
+			}
+		};
+	}
+RESOURCE MENU_PANE r_gsm_pos_container_menu_pane3
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewIncreaseMenuItemCommand;
+			txt = STR_GsmPosContainerView_11;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewDecreaseMenuItemCommand;
+			txt = STR_GsmPosContainerView_12;
+			}
+		};
+	}
+RESOURCE MENU_PANE r_gsm_pos_container_menu_pane4
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewShow_connected_devicesMenuItemCommand;
+			txt = STR_GsmPosContainerView_15;
+			}
+		};
+	}
+RESOURCE DIALOG r_gsm_pos_container_conf_query1
+	{
+	flags = EAknGeneralQueryFlags;
+	buttons = R_AVKON_SOFTKEYS_YES_NO;
+	items =
+		{
+		DLG_LINE
+			{
+			type = EAknCtQuery;
+			id = EGsmPosContainerViewConfQuery1;
+			control = AVKON_CONFIRMATION_QUERY
+				{
+				layout = EConfirmationQueryLayout;
+				label = STR_GsmPosContainerView_13;
+				};
+			}
+		};
+	}
+RESOURCE MENU_PANE r_gsm_pos_container_menu_pane5
+	{
+	items =
+		{
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewGoogle_mapMenuItemCommand;
+			txt = STR_GsmPosContainerView_21;
+			},
+		MENU_ITEM
+			{
+			command = EGsmPosContainerViewLocal_mapMenuItem1Command;
+			txt = STR_GsmPosContainerView_22;
+			}
+		};
+	}

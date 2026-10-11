@@ -1,0 +1,33 @@
+/*
+========================================================================
+ Name        : GsmPosContainer.l27
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+// localized strings for language: Polish (27) 
+CHARACTER_SET UTF8
+
+#define STR_GsmPosContainerView_4 "GsmPos"
+#define STR_GsmPosContainerView_1 ""
+#define STR_GsmPosContainerView_2 ""
+#define STR_GsmPosContainerView_3 ""
+#define STR_GsmPosContainerView_5 "Informacja o satelitach"
+#define STR_GsmPosContainerView_7 "Mapa z lokalizacją"
+#define STR_GsmPosContainerView_9 "Podaj promień (metry)"
+#define STR_GsmPosContainerView_10 "Zoom"
+#define STR_GsmPosContainerView_11 "+"
+#define STR_GsmPosContainerView_12 "-"
+#define STR_GsmPosContainerView_18 "Google Map (punkty)"
+#define STR_GsmPosContainerView_6 "Google Map"
+#define STR_GsmPosContainerView_15 "Podłączone terminale"
+#define STR_GsmPosContainerView_8 "Bluetooth"
+#define STR_GsmPosContainerView_13 "Czy chcesz użyć ostatniej znanej pozycji GPS"
+#define STR_GsmPosContainerView_16 "Schemat"
+#define STR_GsmPosContainerView_17 "Schemat (punkty)"
+#define STR_GsmPosContainerView_20 "Mapa pokrycia BTS"
+#define STR_GsmPosContainerView_21 "Google Map"
+#define STR_GsmPosContainerView_22 "Schemat"
+#define STR_GsmPosContainerView_14 "Pokaż pozycję GPS"
+#define STR_GsmPosContainerView_19 "Ukryj pozycję GPS"

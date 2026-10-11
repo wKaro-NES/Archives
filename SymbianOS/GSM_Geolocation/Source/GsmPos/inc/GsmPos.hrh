@@ -1,0 +1,12 @@
+/*
+========================================================================
+ Name        : GsmPos.hrh
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+enum TGsmPosViewUids
+	{
+	EGsmPosContainerViewId = 1
+	};

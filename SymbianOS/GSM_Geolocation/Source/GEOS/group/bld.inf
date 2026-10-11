@@ -1,0 +1,48 @@
+/*
+============================================================================
+ Name		: bld.inf
+ Author	  : w.karolik
+ Copyright   : Your copyright notice
+ Description : This file provides the information required for building the
+				whole of a Geos.
+============================================================================
+*/
+
+PRJ_PLATFORMS
+DEFAULT
+
+PRJ_MMPFILES
+libalgorithm.mmp
+liblocation.mmp
+libgeom.mmp
+libgeomutil.mmp
+libgeomprep.mmp
+libgeomgraph.mmp
+libgeomgraphindex.mmp
+libindexbintree.mmp
+libindexchain.mmp
+libindexquadtree.mmp
+libindexstrtree.mmp
+libindexsweepline.mmp
+libintervalrtree.mmp
+libio.mmp
+libnoding.mmp
+libsnapround.mmp
+libopbuffer.mmp
+libopdistance.mmp
+liboperation.mmp
+liboplinemerge.mmp
+libopoverlay.mmp
+liboppolygonize.mmp
+liboppredicate.mmp
+liboprelate.mmp
+libopunion.mmp
+libopvalid.mmp
+libplanargraph.mmp
+libprecision.mmp
+libsimplify.mmp
+libutil.mmp
+libgeos.mmp
+
+Geos.mmp
+

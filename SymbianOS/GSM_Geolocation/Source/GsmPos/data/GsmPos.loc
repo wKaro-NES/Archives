@@ -1,0 +1,14 @@
+/*
+========================================================================
+ Name        : GsmPos.loc
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+#ifdef LANGUAGE_01
+#include "GsmPos.l01"
+#endif
+#ifdef LANGUAGE_27
+#include "GsmPos.l27"
+#endif

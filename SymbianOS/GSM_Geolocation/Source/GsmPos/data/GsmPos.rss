@@ -1,0 +1,68 @@
+/*
+========================================================================
+ Name        : GsmPos.rss
+ Author      : WojciechK
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+NAME GSMP
+
+#include <avkon.rsg>
+#include <avkon.rh>
+#include <eikon.rh>
+#include <appinfo.rh>
+#include "GsmPos.hrh"
+#include "GsmPos.loc"
+
+RESOURCE RSS_SIGNATURE
+	{
+	}
+RESOURCE TBUF
+	{
+	buf = "GsmPos";
+	}
+RESOURCE EIK_APP_INFO r_application_gsm_pos_app_ui
+	{
+	cba = R_AVKON_SOFTKEYS_OPTIONS_EXIT;
+	status_pane = r_application_status_pane;
+	}
+RESOURCE STATUS_PANE_APP_MODEL r_application_status_pane
+	{
+	}
+RESOURCE LOCALISABLE_APP_INFO r_localisable_app_info
+	{
+	short_caption = STR_GsmPosApplication_5;
+	caption_and_icon = CAPTION_AND_ICON_INFO
+		{
+		caption = STR_GsmPosApplication_4;
+
+		number_of_icons = 1;
+		icon_file = "\\resource\\apps\\GsmPos_aif.mif";
+		};
+	}
+RESOURCE TBUF r_application_akn_view_reference1
+	{
+	}
+
+RESOURCE DIALOG r_listbox_markable_dialog
+    {
+    flags = EAknDialogMarkableList;
+    buttons = R_AVKON_SOFTKEYS_OK_CANCEL;	//R_AVKON_SOFTKEYS_CANCEL
+    items =
+        {
+        DLG_LINE
+            {
+            type = EAknCtSingleListBox;
+            id = ESelectionListControl;
+            control = LISTBOX
+                {
+                flags = EAknListBoxMarkableList | EAknListBoxLoopScrolling;
+                };
+            }
+        };
+    }
+
+
+	
+#include "GsmPosContainer.rssi"

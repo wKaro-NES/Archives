@@ -1,0 +1,311 @@
+
+/*
+Ported: geos-3.1.1
+*/
+SYSTEMINCLUDE ..\geos
+
+SOURCEPATH ..\geos\algorithm
+SOURCE		CentroidArea.cpp
+SOURCE		CentroidLine.cpp
+SOURCE		CentroidPoint.cpp
+SOURCE		CGAlgorithms.cpp
+SOURCE		ConvexHull.cpp
+SOURCE		HCoordinate.cpp
+SOURCE		InteriorPointArea.cpp
+SOURCE		InteriorPointLine.cpp
+SOURCE		InteriorPointPoint.cpp
+SOURCE		LineIntersector.cpp
+SOURCE		MCPointInRing.cpp
+SOURCE		MinimumDiameter.cpp
+SOURCE		NotRepresentableException.cpp
+SOURCE		PointLocator.cpp
+SOURCE		RayCrossingCounter.cpp
+SOURCE		RobustDeterminant.cpp
+SOURCE		SimplePointInRing.cpp
+SOURCE		SIRtreePointInRing.cpp
+
+SOURCEPATH ..\geos\algorithm\locate
+SOURCE		IndexedPointInAreaLocator.cpp
+SOURCE		PointOnGeometryLocator.cpp
+SOURCE		SimplePointInAreaLocator.cpp
+	
+SOURCEPATH ..\geos\geom	
+SOURCE		Coordinate.cpp
+SOURCE		CoordinateArraySequence.cpp
+SOURCE		CoordinateArraySequenceFactory.cpp
+SOURCE		CoordinateSequence.cpp
+SOURCE		Dimension.cpp
+SOURCE		Envelope.cpp
+SOURCE		Geometry.cpp
+SOURCE		GeometryCollection.cpp
+SOURCE		GeometryComponentFilter.cpp
+SOURCE		GeometryFactory.cpp
+SOURCE		IntersectionMatrix.cpp
+SOURCE		LinearRing.cpp
+SOURCE		LineSegment.cpp
+SOURCE		LineString.cpp
+SOURCE		Location.cpp
+SOURCE		MultiLineString.cpp
+SOURCE		MultiPoint.cpp
+SOURCE		MultiPolygon.cpp
+SOURCE		Point.cpp
+SOURCE		Polygon.cpp
+SOURCE		PrecisionModel.cpp
+SOURCE		Triangle.cpp
+	
+SOURCEPATH ..\geos\geom\util	
+SOURCE		CoordinateOperation.cpp
+SOURCE		GeometryEditor.cpp
+SOURCE		GeometryTransformer.cpp
+SOURCE		GeometryCombiner.cpp
+SOURCE		ShortCircuitedGeometryVisitor.cpp
+
+SOURCEPATH ..\geos\geom\prep	
+SOURCE		AbstractPreparedPolygonContains.cpp
+SOURCE		BasicPreparedGeometry.cpp
+SOURCE		PreparedGeometry.cpp
+SOURCE		PreparedGeometryFactory.cpp
+SOURCE		PreparedLineString.cpp
+SOURCE		PreparedLineStringIntersects.cpp
+SOURCE		PreparedPoint.cpp
+SOURCE		PreparedPolygon.cpp
+SOURCE		PreparedPolygonContains.cpp
+SOURCE		PreparedPolygonContainsProperly.cpp
+SOURCE		PreparedPolygonCovers.cpp
+SOURCE		PreparedPolygonIntersects.cpp
+SOURCE		PreparedPolygonPredicate.cpp
+	
+SOURCEPATH ..\geos\geomgraph	
+SOURCE		Depth.cpp
+SOURCE		DirectedEdge.cpp
+SOURCE		DirectedEdgeStar.cpp
+SOURCE		Edge.cpp
+SOURCE		EdgeEnd.cpp
+SOURCE		EdgeEndStar.cpp
+SOURCE		EdgeIntersection.cpp
+SOURCE		EdgeIntersectionList.cpp
+SOURCE		EdgeList.cpp
+SOURCE		EdgeNodingValidator.cpp
+SOURCE		EdgeRing.cpp
+SOURCE		GeometryGraph.cpp
+SOURCE		GraphComponent.cpp
+SOURCE		Label.cpp
+SOURCE		Node.cpp
+SOURCE		NodeFactory.cpp
+SOURCE		NodeMap.cpp
+SOURCE		PlanarGraph.cpp
+SOURCE		Position.cpp
+SOURCE		Quadrant.cpp
+SOURCE		TopologyLocation.cpp
+	
+SOURCEPATH ..\geos\geomgraph\index
+SOURCE		MonotoneChainEdge.cpp
+SOURCE		MonotoneChainIndexer.cpp
+SOURCE		SegmentIntersector.cpp
+SOURCE		SimpleEdgeSetIntersector.cpp
+SOURCE		SimpleMCSweepLineIntersector.cpp
+SOURCE		SimpleSweepLineIntersector.cpp
+SOURCE		SweepLineEvent.cpp
+SOURCE		SweepLineSegment.cpp
+
+SOURCEPATH ..\geos\index\bintree	
+SOURCE		Bintree.cpp
+SOURCE		Interval.cpp
+SOURCE		Key.cpp
+SOURCE		Node.cpp
+SOURCE		NodeBase.cpp
+SOURCE		Root.cpp
+	
+SOURCEPATH ..\geos\index\chain	
+SOURCE		MonotoneChain.cpp
+SOURCE		MonotoneChainBuilder.cpp
+SOURCE		MonotoneChainOverlapAction.cpp
+SOURCE		MonotoneChainSelectAction.cpp
+	
+SOURCEPATH ..\geos\index\intervalrtree	
+SOURCE		IntervalRTreeBranchNode.cpp
+SOURCE		IntervalRTreeLeafNode.cpp
+SOURCE		IntervalRTreeNode.cpp
+SOURCE		SortedPackedIntervalRTree.cpp
+	
+SOURCEPATH ..\geos\index\quadtree	
+SOURCE		DoubleBits.cpp
+SOURCE		IntervalSize.cpp
+SOURCE		Key.cpp
+SOURCE		Node.cpp
+SOURCE		NodeBase.cpp
+SOURCE		Root.cpp
+SOURCE		Quadtree.cpp
+	
+SOURCEPATH ..\geos\index\strtree	
+SOURCE		AbstractNode.cpp
+SOURCE		AbstractSTRtree.cpp
+SOURCE		Interval.cpp
+SOURCE		ItemBoundable.cpp
+SOURCE		SIRtree.cpp
+SOURCE		STRtree.cpp
+	
+SOURCEPATH ..\geos\index\sweepline	
+SOURCE		SweepLineEvent.cpp
+SOURCE		SweepLineIndex.cpp
+SOURCE		SweepLineInterval.cpp
+	
+SOURCEPATH ..\geos\io	
+SOURCE		ByteOrderDataInStream.cpp
+SOURCE		ByteOrderValues.cpp
+SOURCE		CLocalizer.cpp
+SOURCE		ParseException.cpp
+SOURCE		StringTokenizer.cpp
+SOURCE		Unload.cpp
+SOURCE		WKBReader.cpp
+SOURCE		WKBWriter.cpp
+SOURCE		WKTReader.cpp
+SOURCE		WKTWriter.cpp
+SOURCE		Writer.cpp
+	
+SOURCEPATH ..\geos\noding	
+SOURCE		FastNodingValidator.cpp
+SOURCE		FastSegmentSetIntersectionFinder.cpp
+SOURCE		IntersectionAdder.cpp
+SOURCE		IntersectionFinderAdder.cpp
+SOURCE		IteratedNoder.cpp
+SOURCE		MCIndexNoder.cpp
+SOURCE		MCIndexSegmentSetMutualIntersector.cpp
+SOURCE		NodedSegmentString.cpp
+SOURCE		NodingValidator.cpp
+SOURCE		Octant.cpp
+SOURCE		ScaledNoder.cpp
+SOURCE		SegmentIntersectionDetector.cpp
+SOURCE		SegmentNode.cpp
+SOURCE		SegmentNodeList.cpp
+SOURCE		SegmentString.cpp
+SOURCE		SegmentStringUtil.cpp
+SOURCE		SimpleNoder.cpp
+SOURCE		SingleInteriorIntersectionFinder.cpp
+	
+SOURCEPATH ..\geos\noding\snapround	
+SOURCE		HotPixel.cpp
+SOURCE		MCIndexPointSnapper.cpp
+SOURCE		MCIndexSnapRounder.cpp
+SOURCE		SimpleSnapRounder.cpp
+	
+SOURCEPATH ..\geos\operation	
+SOURCE		GeometryGraphOperation.cpp
+SOURCE		IsSimpleOp.cpp
+	
+SOURCEPATH ..\geos\operation\buffer	
+SOURCE		BufferBuilder.cpp
+SOURCE		BufferOp.cpp
+SOURCE		BufferSubgraph.cpp
+SOURCE		OffsetCurveBuilder.cpp
+SOURCE		OffsetCurveSetBuilder.cpp
+SOURCE		RightmostEdgeFinder.cpp
+SOURCE		SubgraphDepthLocater.cpp
+	
+SOURCEPATH ..\geos\operation\distance	
+SOURCE		ConnectedElementLocationFilter.cpp
+SOURCE		ConnectedElementPointFilter.cpp
+SOURCE		DistanceOp.cpp
+SOURCE		GeometryLocation.cpp
+	
+SOURCEPATH ..\geos\operation\linemerge	
+SOURCE		EdgeString.cpp
+SOURCE		LineMergeDirectedEdge.cpp
+SOURCE		LineMergeEdge.cpp
+SOURCE		LineMergeGraph.cpp
+SOURCE		LineMerger.cpp
+SOURCE		LineSequencer.cpp
+	
+SOURCEPATH ..\geos\operation\overlay	
+SOURCE		EdgeSetNoder.cpp
+SOURCE		ElevationMatrix.cpp
+SOURCE		ElevationMatrixCell.cpp
+SOURCE		FuzzyPointLocator.cpp
+SOURCE		LineBuilder.cpp
+SOURCE		MaximalEdgeRing.cpp
+SOURCE		MinimalEdgeRing.cpp
+SOURCE		OffsetPointGenerator.cpp
+SOURCE		OverlayNodeFactory.cpp
+SOURCE		OverlayOp.cpp
+SOURCE		OverlayResultValidator.cpp
+SOURCE		PointBuilder.cpp
+SOURCE		PolygonBuilder.cpp
+	
+SOURCEPATH ..\geos\operation\polygonize	
+SOURCE		PolygonizeDirectedEdge.cpp
+SOURCE		PolygonizeEdge.cpp
+SOURCE		EdgeRing.cpp
+SOURCE		PolygonizeGraph.cpp
+SOURCE		Polygonizer.cpp
+	
+SOURCEPATH ..\geos\operation\predicate	
+SOURCE		RectangleContains.cpp
+SOURCE		RectangleIntersects.cpp
+SOURCE		SegmentIntersectionTester.cpp
+	
+SOURCEPATH ..\geos\operation\relate	
+SOURCE		EdgeEndBuilder.cpp
+SOURCE		EdgeEndBundle.cpp
+SOURCE		EdgeEndBundleStar.cpp
+SOURCE		RelateComputer.cpp
+SOURCE		RelateNode.cpp
+SOURCE		RelateNodeFactory.cpp
+SOURCE		RelateNodeGraph.cpp
+SOURCE		RelateOp.cpp
+	
+SOURCEPATH ..\geos\operation\union	
+SOURCE		CascadedPolygonUnion.cpp
+	
+SOURCEPATH ..\geos\operation\valid	
+SOURCE		ConnectedInteriorTester.cpp
+SOURCE		ConsistentAreaTester.cpp
+SOURCE		IsValidOp.cpp
+SOURCE		QuadtreeNestedRingTester.cpp
+SOURCE		RepeatedPointTester.cpp
+SOURCE		SimpleNestedRingTester.cpp
+SOURCE		SweeplineNestedRingTester.cpp
+SOURCE		TopologyValidationError.cpp
+	
+SOURCEPATH ..\geos\planargraph	
+SOURCE		DirectedEdge.cpp
+SOURCE		DirectedEdgeStar.cpp
+SOURCE		Edge.cpp
+SOURCE		Node.cpp
+SOURCE		NodeMap.cpp
+SOURCE		PlanarGraph.cpp
+SOURCE		Subgraph.cpp
+	
+SOURCEPATH ..\geos\planargraph\algorithm		
+SOURCE		ConnectedSubgraphFinder.cpp
+	
+SOURCEPATH ..\geos\precision	
+SOURCE		CommonBits.cpp
+SOURCE		CommonBitsOp.cpp
+SOURCE		CommonBitsRemover.cpp
+SOURCE		EnhancedPrecisionOp.cpp
+SOURCE		GeometrySnapper.cpp
+SOURCE		LineStringSnapper.cpp
+SOURCE		SimpleGeometryPrecisionReducer.cpp
+	
+SOURCEPATH ..\geos\simplify	
+SOURCE		DouglasPeuckerLineSimplifier.cpp
+SOURCE		DouglasPeuckerSimplifier.cpp
+SOURCE		LineSegmentIndex.cpp
+SOURCE		TaggedLineSegment.cpp
+SOURCE		TaggedLinesSimplifier.cpp
+SOURCE		TaggedLineString.cpp
+SOURCE		TaggedLineStringSimplifier.cpp
+SOURCE		TopologyPreservingSimplifier.cpp
+	
+SOURCEPATH ..\geos\util	
+SOURCE		Assert.cpp
+SOURCE		GeometricShapeFactory.cpp
+SOURCE		math.cpp
+SOURCE		Profiler.cpp
+	
+SOURCEPATH ..\capi	
+SOURCE		geos_c.cpp
+SOURCE		geos_ts_c.cpp
+	
+SOURCEPATH ..\geos
+SOURCE		inlines.cpp

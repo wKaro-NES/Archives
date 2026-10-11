@@ -1,0 +1,16 @@
+/*
+========================================================================
+ Name        : GsmPosRemote.hrh
+ Author      : w.karolik
+ Copyright   : Your copyright notice
+ Description : 
+========================================================================
+*/
+enum TGsmPosRemoteApplicationCommands
+	{
+	EGsmPosRemoteApplicationPingMenuItemCommand = 0x6000
+	};
+enum TGsmPosRemoteApplicationControls
+	{
+	EGsmPosRemoteApplicationConfQuery1 = 1
+	};
