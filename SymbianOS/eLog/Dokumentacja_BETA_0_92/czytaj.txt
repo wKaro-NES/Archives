@@ -1,0 +1,18 @@
+DOKUMENTACJA WERSJI 0.92
+1) screenshot bonusa + opis do elementów bonusa
+2) uzupe³nienie screenshota planu taryfowego o nowe elementy SMS,price list SMS
+3) modyfikacja screenshota z dialogiem price list:
+	a) rozbicie na oddzielne wersje zwi¹zane z linkowaniem prefixu/bonusa - ogniskowanie uwagi na jednostce do której dowi¹zany jest bonus ?
+	b) nowe zrzuty dla price list z zak³adkami
+	c) screenshot dla price list SMS
+4) nowy screenshot dla wygl¹du rachunku uwzglêdniaj¹cy zmianê sposobu prezentacji wykorzystania bonusów
+5) modyfikacje przyk³adowych price list w zwi¹zku ze zmian¹ wyœwietlania wskaŸnika bonus oraz nowymi zak³adkami taryfikatora
+6) zmiana opisu sposobu wykonywania obliczeñ po implementacji taryfikatorów zak³adkowych (mo¿e rozrysowany blokowo wraz z ekranami algorytm ?)
+7) przyk³adowe plany taryfowe i ich odzwierciedlenie w aplikacji na zasadzie: tabelka - wielki blokowy schemat zrzutów ekranu
+8) podpowiedzi
+	a) wyboru prefixu numeru telefonicznego - regu³y i sposób wybierania rzeczywistych po³¹czeñ (dyscyplina zwi¹zana z zachowaniem pewnego schematu np. wszystkie po³¹czenia zaczynamy od +48xx itd bez dowolnoœci zwi¹zanej z pominiêciem prefixu kraju itp.)
+	b) 
+9) opis dialogu zwi¹zanego ze zmian¹ okresu rozliczeniowego (+zrzut ekranu)
+10) przyk³ady price list dla SMS
+11) przyk³ady price list zak³adkowych
+12) 

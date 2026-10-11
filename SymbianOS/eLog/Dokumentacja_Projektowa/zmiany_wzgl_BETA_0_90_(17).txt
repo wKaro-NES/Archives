@@ -1,0 +1,601 @@
+2003.07.17
+Zmiany zwi¹zane ze zwiêkszeniem precyzji obliczeñ z 2 do 5ciu miejsc po przecinku:
+
+- TMoney::Parse()
+- TMoney::Format() - formatowanie wg locale (z walut¹) zawsze zwraca liczbê obciêt¹ BEZ ZAOKR¥GLENIA do 2 miejsc po przecinku; plus overload dla aCurrency jako TInt64
+- CKontrolka::rysujJednostkeTaryfikatora() - zmiana zakresów i sposobu wyœwietlania lub nie piktogramu banknotu uzale¿nionego od wprowadzonych przez u¿ytkownika iloœci miejsc dziesiêtnych
+- CKontrolka::_edycjaElementuL() - zmiany zakresów
+- CPlanTaryf::obliczKoszt() zwraca sumê kosztów jako TInt64
+- CPlanTaryf::_DBMSprocessRecordL() koszt jako TInt64 ale UWAGA! obciêty do Int32 przed wpisem do DBMS
+- CPlanTaryf zmienna iStatKoszt jako TInt64
+
+2003.07.18
+- CDoba::obliczKoszt() zwraca TInt64
+- CRamkaCzas::obliczKoszt() zwraca TInt64
+- CTaryfikator::obliczKoszt() zwraca TInt64
+- CSMS::obliczKoszt() zwraca TInt64
+- CPlanTaryf::obliczKosztSMS() zwraca TInt64
+- TMoney::Format() overload dla TInt64 poprawione formatowanie du¿ych liczb w stos do 17/07
+- zmiana CKontrolka::rysujOknoTaryfikatora() i CKontrolka::rysujJednostkeTaryfikatora(): piktogram banknotu pojawi siê tylko gdy brak jakiegokolwiek bonusu w taryfikatorze na miejscu œwinki
+- zmiana CKontrDBMS::addRecordL(),updateRecordL(),getColumnTextL(),viewRecordDetailL(),getRowTextL() oraz doCreateTableL() na kolumnê koszt jako TIn64
+
+UWAGA! w/w zmiana w DBMS wymaga dystrybucji w SIS czystej BILLING.DB do zast¹pienia podczas upgrade'u (odpowiedni wpis w *.PKG do póŸniejszego usuniêcia)
+
+- zmiana w CPlanTaryf::_DBMSprocessRecordL() likwiduj¹ca koniecznoœæ obciêcia do TInt32 (patrz info z 17/07)
+
+
+2003.07.19
+Zmiany sposobu edycji linków prefixu i bonusa:
+
+- CKontrolka::Draw():
+	a) zmiana elementu ENumerTel jako akapit 1szego stopnia (do czasu implementacji ENumerGrupa)
+	b) zas³oniêcie zbêdych elementów podczas trybu linkowania prefixu lub bonusa
+
+- CWezel::ustawOpisTypL() - zmiana kolorystyki elementu ENumerTel (w/w pkt a) )
+- CKontrolka::ruchKursoraL() - ograniczenie mo¿liwoœci wêdrówki podczas edycji taryfikatora tylko do dozwolonych elementów
+- CKontrolka::aktywnoscWezlaL() - brak mo¿liwoœci rozwijania/zwijania ga³êzi podczas edycji taryfikatora
+- _listaElementowTaryfikatora() - rozwija wszytkie elementy a nie tylko powi¹zane z danym taryfikatorem: konieczne ze wzglêdu na zablokowanie mo¿liwoœci rozwijania/zwijania wêz³a
+- _listaElementowTaryfikatora() - przesuniêcie za³¹czania trybu w³¹czenia linków do n/w CKontrContainer::_stanTaryfikatoraL()
+- CKontrContainer::_stanTaryfikatoraL() - zmiana trybu w³¹czenia/wy³¹czenia edycji linków do bonusów i linku do prefixów tak aby oba tryby wzajemnie siê wyklucza³y
+
+Zmiany zwi¹zane z "zak³adkowymi taryfikatorami"
+- nowa CKontrolka::rysujZakladkeTaryfikatora()
+- CKontrolka::rysujOkienkoTaryfikatora() wywo³anie rysujZakladkeTaryfikatora()
+
+2003.07.21
+Nowa opcja Billing scheme -> Clear all
+- CKontrContaier::inicjujKontrolkeL() - dodanie parametru aDialog=EFalse - dla interaktywnego czyszczenia
+- CKontrView::HandleCommandTRAPL() - dodanie wywo³ania inicjujKontrolkeL()
+
+Modyfikacje ENGINE'a zwi¹zane z "zak³adkowymi" taryfikatorami - patrz HISTORIA.TXT w \engine
+Modyfikacje VIEW zwi¹zane z "zak³adkowymi" taryfikatorami
+- usuwajKomorkeL() - zmiana z CTaryfikator na CTaryfikatorZakladki
+- dozwolonaPozycjaUsuwania() - tymczasowo zwraca gotowoœæ do kasowania pierwszej (indeks 0) zakladki CTaryfikatorZakladki
+- pobierzOpisKomorkiL() - zawsze opis 1szej zakladki 
+- _linkTaryfikatora() - linki s¹ wspólne dla wszystkich taryfikatorów - wiêc sprawdŸ taryfikator 1szej zakladki; proste porównanie adresów obwarowane zosta³o kodem sprawdzaj¹cym
+- _edycjaTaryfikatoraL() - tymczasowo edycja tylko 1szej zakladki
+- WizardEditTaryfikatorL(),CKontrolka::dodawajTaryfikatorL()
+
+2003.07.22
+- korekta b³êdu w CKontrolka::WizardEditTaryfikatorL() - CWezel powinien przechowywaæ wskaŸnik na obiekt CTaryfikatorZakladki a nie CTaryfikator !
+- CTaryfikatorZakladki::SaveL() format zapisu w ELOG.TXT
+<tab>	<=xxxx			//limit czasowy dla 1szej zakladki (czyli taryfikatora); 2147483647 - max wart TInt32 dla wszystkich
+		AAA BBB		//w³aœciwa treœæ taryfikatora bez zmian
+		CCC DDD
+			ZZZZ
+	[<=yyyy]		//limit czasowy dla nastêpnej zakladki, itd.
+- zmiana  CRamkaCzas::SaveL() - wywo³anie metod SaveL() dla wszystkich posiadanych CTaryfikatorZakladki (a nie CTaryfikator)
+format zapisu w ELOG.TXT
+<tab>	# 0			//1szy zbiór CTaryfikatorZakladki
+	<=xxxx			//...definicje w/w formatu CTaryfikatorZakladki::SaveL()
+	...
+	[<=yyyy]
+	...
+	[# 1]			//2gi zbiór itd.
+
+
+- CPlanTaryf
+a) nowe zmienne iAktZbior, etapy ERamkaTaryfikatorZakladki i ERamkaTaryfikatorLimit
+b) zmiany _constructPlantaryfL(),_constructRamkaL() zwi¹zane ze zmian¹ formatu ELOG.TXT
+c) zmiany w ELOG.TXT : ograniczniki <xxx> zamienione na (xxx) - <day>, <no_prefix>, <all_prefix>
+
+
+2003.07.23
+Usuniêcie zbêdnych znaków '<' i '>' z ELOG.TXT:
+a) Taryfikator.h <all_prefix>, <no_prefix> na all_prefix, no_prefix
+b) CDoba::SaveL() "@ <day>" na "@ day"
+
+Ci¹g dalszy implementacji ³adowania z pliku zak³adkowych taryfikatorów:
+- zmiana CTaryfikatorZakladki::SaveL() format zapisu w ELOG.TXT z "<=xxxx" na "< xxxx" (2 tokeny)
+- nowa  CRamkaCzas::dodajTaryfikatorZakladkiL() - dodaje pusty CTaryfikatorZakladki w przeciwieñstwie do dodajTaryfikatorL() które tworzy tak¿e domyœlny taryfikator w zbiorze
+- zmiana  CRamkaCzas::dodajTaryfikatorL() - zamiast User::Invariant() w razie b³êdu zwraca NULL
+- zmiana CPlanTaryf::_constructRamkaL() - dodanie pustego zbioru + dodawanie taryfikatora tylko gdy napotkano limit
+- zmiana CPlanTaryf::_constructPlanTaryf() - wyrzucenie zmiennej TBool nowy_taryfikator;zmiana sygnatury CPlanTaryf::_constructRamkaL() z tym zwi¹zana
+- kontrola poprawnoœci kolejnoœci konstruowania _contructRamkaL() poprzez sprawdzanie wskaŸników !NULL na odpowiednim etapie
+
+CKontrolka:
+- nowa zmienna CTaryfikatorZakladki* iTaryfikatorZakladki oraz TInt iNrZakladkiTaryf
+- czyscKontrolkeL() z w/w
+- _edycjaTaryfikatoraL() - inicjawanie (1) iNrZakladkiTaryf, iTaryfikatorZakladki i iTaryfikator oraz NULL przy wyjœciu (-1)
+- rysujOknoTaryfikatora() - rysowanie wg prawdziwej iloœci zak³adek
+- nowa zmianaZakladkiTaryfikatoraL() - ruch kursora prawo-lewo podczas aktywnego okienka taryfikatora powoduje prze³¹czanie zak³adek taryfikatora
+- OfferKeyEventL() - obs³uga prawo-lewo prze³¹cza tak¿e zak³adki
+
+
+2003.07.24
+- zmiana w ELOG.TXT formatu zapisu limitu z "< xxxx" na "> xxxx"; modyfikacja CPlanTaryf::_constructPlanTaryfL() i CTaryfikatorZakladki::SaveL()
+- modyfikacja CTaryfikatorZakladki::pobierzTaryfikatorWgLimitu()
+- modyfikacja domyœlnych wartoœci limitu w dodajTaryfikatorL(TInt aLimitMinut = 0) oraz ustawLimitTaryfikatora(TInt aNrZakladki, TInt aLimitMinut = 0);
+- dodane podmenu Tabs menu Advanced edycji taryfikatora
+
+
+2003.07.25
+- nowa CTaryfikatorZakladki::dodajNumerZakladek() i usunNumerZakladek() - dodaj¹ce/usuwaj¹ce link na CNumer we WSZYSTKICH CTaryfikator w zbiorze - indywidualne modyfikacje dozwolone na poziomie wskaŸnika na wybrany CTaryfikator
+- zmiana CKontrolka::_edycjaElementuL() link numeru telefonicznego dodawany/usuwany we wszystkich zakladkach CTaryfikatorZakladki
+- zmiana CKontrolka::_linkTaryfikatora() 
+	a)wêze³ taryfikatora jest zawsze widoczny (nieprzyciemniany) przy ka¿dej zak³adce nie tylko 1szej
+	b)odpytywanie zbioru a nie pojedynczego taryfikatora
+- zmiana _linkTaryfikatoraInnego() zwraca CTaryfikatorZakladki a nie CTaryfikator
+- zmiana z w/w Draw() i _edycjaElementuL()
+- zmiana CRamkaCzas::jestWskaznikNaNumer() zwraca CTaryfikatorZakladki; oraz zwi¹zana z tym zmiana CDoba::usunNumerTaryfikatorow()
+
+- zmiana CKontrView::DynInitMenuPaneL() - wygaszanie podmenu Advanced podczas linkowania numeru/bonusu
+- zmiana CKontrolka::_edycjaTaryfikatoraL() - wyrzucenie podmiany opisów przycisków CBA (Link), zmiana opisów w menu na "link phone,link discount" jako bardziej logiczne
+- nowa CKontrolka::edycjaLimituTaryfikatora(); w zwi¹zku z tym CKontrView::HandleCommandL() i CKontrContainer::_stanTaryfikatoraL() - nowy stan nr "3"
+- nowa CKontrolka::dodajTaryfZakladkaL(); w zwi¹zku z tym CKontrView::HandleCommandTRAPL() i CKontrContainer::_stanTaryfikatoraL() - nowy stan nr "4"
+
+2003.07.26
+- zmiana CTaryfikatorZakladki::dodajTaryfikatorL() - ka¿dy nastêpny taryfikator otrzymuje linki od domyœlnego taryfikatora
+- zmiana CTaryfikator::dodajNumer() - zapobieganie wstawianiu duplikatów
+- CPlanTaryf::_constructRamkaL() - numer jest dodawany do wszystkich zak³adek a nie tylko do jednej
+- nowa CTaryfikatorZakladki::usunTaryfikator()
+- nowa CKontrolka::usunTaryfZakladkaL(); w zwi¹zku z tym CKontrView::HandleCommandL() i CKontrContainer::_stanTaryfikatoraL() - nowy stan nr "5"
+- CKontrolka.h dodane enum okreœlaj¹ce polecenia dla metody CKontrContainer::_stanTaryfikatora():
+a)  modyfikacja _stanTaryfikatora() i CKontrolka::_edycjaTaryfikatoraL()
+b)  modyfikacja CKontrView::DynInitMenuPaneL() i CKontrView::HandleCommandTRAPL() i CKontrView::HandleCommandL()
+
+- modyfikacja CKontrolka::usunTaryfZakladkaL() i CKontrolka::edycjaLimituTaryfikatoraL() o mo¿liwoœæ odpytania czy operacja jest dozwolona; modyfikacja CKontrContainer::_stanTaryfikatora()
+- modyfikacja CKontrView::DynInitMenuPaneL() - zas³anianie niedozwolonych operacji na zakladkach taryfikatora
+
+2003.07.27
+- poprawa CPlanTaryf::_constructRamkaL() - b³êdy w dowi¹zywaniu bonusa do jednostek
+- zmiana CKontrolka::pobierzOpisKomorkiL() na void, zmiana CKontrolka::Draw() "cieñ" taryfikatora rysowany dla taryfikatorów z zak³adkami, a nie wiêcej ni¿ 1 jednostka taryfikacyjna
+- zmiana CKontrolka::zmianaZakladkiTaryfikatoraL() - blokada prze³¹czania zak³adek podczas linkowania
+- nowa CTaryfikatorZakladki::jestGotowaDoKasowania(), zmiana CKontrolka::dozwolonaPozycjaUsuwania() - odpytywanie zbioru a nie domyœlnego taryfikatora
+
+Zmiany zwi¹zane z implementacj¹ sumowania czasu trwania wszystkich rozmów podczas wykonywania obliczeñ:
+CPlanTaryf:
+a) nowa TInt iStatCzasTrwania
+b) inicjacja w czyscPlanTaryfL(),nowyOkresRozliczeniowy(),_DBMSstartUpdateL()
+c) zmiana w _DBMSprocessRecordL() - sumowanie czasów TYMCZASWOW  bez uwzglêdnienia bonusowego czasu
+d) CKontrContainer::drawBillingL() - na ekran informacje o sumarycznym czasie'
+
+2003.07.28
+Zmiany zwi¹zane z implementacj¹ liczenia kosztu wg taryfikatorów zak³adkowych:
+a) nowa CTaryfikatorZakladki::obliczKoszt()
+b) zmiana CRamkaCzas::obliczKoszt() - wo³a CTaryfikatorZakladki::obliczKoszt()
+c) CRamkaCzas::obliczKoszt i CDoba::obliczKoszt() otrzymuje dodatkowy parametr TInt& aCzasSuma
+d) CPlanTaryf::obliczKoszt() - wo³a obliczKoszt() z parametrem iStatCzasTrwania,CPlanTaryf::_DBMSprocessRecordL() - wyrzucone sumowanie iStatCzasTrwania
+e) CTaryfikator::obliczKoszt() - zwracany naliczony jako p³atny czas trwania TInt& aCzasSuma
+f) zmiana CSMS::obliczKoszt() w zwi¹zku z pkt. e) - sumaryczny czas jest nieistotny
+
+2003.07.29
+liczenie kosztu wg zak³adek c.d.
+- zmiana CTaryfikatorZakladki::pobierzTaryfikatorWgLimitu(TInt& aIloscWszystkichMinut) - zwraca poprzez ref. górny pu³ap do którego dany taryfikator obowi¹zuje (powy¿ej którego inny taryfikator jest odpowiedzialny za obliczenia); zmiana sposobu poszukiwania
+- zmiana CTaryfikatorZakladki::obliczKoszt() - rozliczanie kosztów wg posiadanych zak³adek
+- zmiana CTaryfikator::obliczKoszt() - pilnowanie limitu rozliczanych minut dla danej zak³adki i sygnalizacja potrzeby zmiany zak³adki 
+- zmiana CSMS::obliczKoszt() - na potrzeby zmiany sygnaturki CTaryfikator::obliczKoszt()
+- ...
+
+Zmiany wymaga CRamkaCzas::pobierzTaryfikator() gdy¿ domyœlnie zwraca 1szy taryfikator w zwi¹zku z tym:
+- likwidacja CRamkaCzas.h iAktZakladka
+- zmiana CRamkaCzas::pobierzTaryfikator() - zwraca zbiór a nie 1szy taryfikator
+- nowa CTaryfikatorZakladki::usunBonusZakladek(const CBonus* aBonus) - we wszystkich zak³adkach
+- zmiana CDoba::usunBonusTaryfikatorow() - wo³a w/w
+- zmiana CRamkaCzas::jestOdpowiedzialna() - zmiana na poœrednie wo³anie pobierzTaryfikator()->pobierzTaryfikatorWgZakladki(0)->jestNumer()
+- zmiana CRamkaCzas::_test(),CRamkaCzas::dodajBonusRamki(),CRamkaCzas::usunBonusRamki() j/w
+
+2003.07.30
+Modyfikacja CBonus::odliczBonusCzasowy() zwi¹zana z pomniejszeniem o rzeczywist¹ wartoœæ "resztek" bonusa a nie o pe³ny krok ( w sytuacji gdy iloœæ pozosta³ego czasu jest mniejsza od kroku)
+
+Zmiany zwi¹zane z pomniejszaniem CBonus o wartoœæ jednostek taryfikacyjnych:
+- nowa CTaryfikator::pobierzListeJednostek() - na potrzeby uzyskania wartoœci jednostek taryfikacyjnych
+- zmiana CBonus::odliczBonusCzasowy(TInt& aCzas,const CArrayFixFlat<TJednostka>* aJednostki,TInt aJednostkiStart,TInt aJednostkiOkres) - aJednostki, aJednostkiStart i aJednostkiOkres potrzebne dla celów pomniejszania wg czasów w jednostkach taryfikacyjnych
+- modyfikacja CTaryfikator::obliczKoszt() - wywo³anie w/w
+
+- CKontrForms::DoNotSaveFormDataL() - dozwolona wartoœæ 0 slidera Count precision oznaczaj¹ca pomniejszanie "zmienne" (wg taryfikatora)
+- CKontrForms::DoNotSaveFormDataL(), CKontrForms::SaveFormDataL() -  zmiana wyœwietlania opisu aby zamiast 0 sek. pojawi³o siê info
+
+
+2003.07.31
+Zmiany za³¹czania diagnostyki __TRACE i __ASSERT
+a) CDoba::CDoba() - wyrzucenie __ASSERT
+b) CNumer::ustawNumerL() - zamiana __ASSERT na EFalse przy próbie parsowania zbyt d³ugiego numeru
+c) CRamkaCzas::CRamkaCzas() - wyrzucenie __ASSERT
+d) CTaryfikator::dodajJednostkeL() - zamiana __ASSERT na EFalse przy próbie dodania jednostki o czasie <0
+e) CTaryfikator::obliczKoszt() - wyrzucenie __ASSERT dla ujemnego czasu rozmowy
+f) CTaryfikatorZakladki::dodajTaryfikatorL(),usunTaryfikator() - dodanie __ASSERT w celu zbadania niezmienników
+g) CTaryfikator::dodajBonus(),usunBonus() - dodanie __ASSERT w celu zbadania niezmienników
+
+
+Modyfikacja CBonus:
+- POPRAWA EWIDENTNEGO B£ÊDU Z WERSJI <=0.90(XX) POLEGAJ¥CA NA ZAPISYWANIU W ELOG.TXT WYKORZYSTANEGO PO ROZLICZENIU BONUSA (zmiana CBonus::SaveL() - zapis iCzas na iPoczCzas)
+- zmiana CBonus::odliczBonusCzasowy() - wyjœcie z metody nie dopuszcza do pozostawienia ujemnego bonusa
+- zmiana CTaryfikator::obliczKoszt() - usuniêcie wo³ania ustawOkres() i przypisanie zamiast wykorzystania iOkres - wo³anie pobierzPrzewidzianyOkres()
+- zmiana TJednostka::obliczKoszt() - wyrzucenie TRealX - koszt dawno liczony na Tint(64)
+
+2003.08.01
+- zmiana CTaryfikator::dodajBonus(const CBonus* aBonus,TInt aNrJednostki, TBool aUnikalny = ETrue) - dodaj bonus do jednostki aNrJednostki; jeœli aBonus by³ dowi¹zany do innej jednostki i aUnikalny == ETrue to przesuñ z poprzedniej jednostki do aNrJednostki; jeœli !aUnikalny - nie rób nic (dla potrzeby interpretacji podczas konstrukcji z pliku ELOG.TXT pochodz¹cego z wersji 0.90(xx) i 0.91(xx)
+
+
+2003.08.02
+- zmiana CBonus::odliczBonusCzasowy() - przerwanie odliczania po napotkania jednostki taryfikacyjnej o zerowym czasie trwania
+Zmiany zwi¹zane z nowym okresem rozliczeniowym:
+CBonus:
+a) nowe zmienne iPrzeniesionyCzas - wartoœæ z poprzedniego okresu rozliczeniowego; iPrzeniesionyPierwszy - okreœlaj¹ce pomniejszanie jako pierwszego czasu z poprzednich okresów lub czasu z aktualnego okresu 
+b) zmiana CBonus::nowyOkresRozliczeniowy(TBool aNastOkres,TBool aPrzeniesCzas, TBool aPierwszyAktaulny ,TBool aDodajDoPoprzednich)  - na potrzeby przenoszenia czasów na nastêpne miesi¹ce
+c) zmiana CBonus::pobierzBonusWykorzystanie() - zwraca równie¿ wartoœæ z poprzednich okresów rozliczeniowych
+
+
+
+Zmiany w CKontrForms zwi¹zane z nowym formularzem parametrów okresu rozliczeniowego:
+- TKontrFormsData - dodane 2 pola iPopup 
+- nowa CKontrForms::ustawPolaFormularzaOkresRozliczeniowyL()
+- zmiana CKontrForms::SaveFormDataL() i DoNotSaveFormData() dodanie obs³ugi nowego formularza
+
+- nowa CKontrContainer::NowyOkresRozliczeniowyL() i CKontrView::HandleCommandTRAPL() na jej wywo³anie
+
+
+oraz
+- CPlanTaryf::nowyOkresRozliczeniowy() - dodane parametry okreœlaj¹ca potrzebê zmiany oraz zachowanie przy przeniesieniu pozosta³ych bonusów na nastêpny miesi¹c
+- CKontrContainer::PlanTaryfRozliczenieL() modyfikacja zwi¹zana z w/w
+- CKontrContainer::_daneBillingoweBonusL() wyœwietla równie¿ czas z przeniesienia jeœli by³ (<>0)
+
+
+2003.08.03
+- nowa CKontrForms::HandleControlStateChangeL(TInt aControlId) - wygaszaj¹ca opcje aktywne tylko jeœli wybrano przeniesienia bonus na nastêpny okres rozliczeniowy
+- zmiana CKontrForms::ustawPolaFormularzaOkresRozliczeniowyL() - usuniêcie flag ustawiaj¹cych "dane zmienione"; zmiana CKontrForms::PostLayoutDynInitL() - autoamtyczne wejœcie w stan edycji dla formy nowego okresu rozliczeniowego
+
+- CKontrContainer::NowyOkresRozliczeniowyL() - automatyczna modyfikacja dat nastêpnego okresu rozliczeniowego, potwierdzenie zmiany okresu rozliczeniowego, przeliczenie kosztu jeœli wymagane, utrwalenie zmian w pliku ELOG.INI
+
+
+CBonus:
+- usuniêcie iKwota, iPoczKwota, iKrokKwot, ustawBonusKwotowy(),odliczBonusKwotowy()
+- modyfikacja CBonus::SaveL() zamiast usuniêtych wart. kwotowych zapis iPrzeniesionyCzas jako 3ci token
+Zmiana formatu ELOG.TXT:
+
+[bonus_id <TAB>	opis dowolny bonusa
+                [+][-]czas  <TAB>  krok_czasowy	<TAB> przeniesiony_czas	;Int,Int,Int wartoœæ ujemna "czas" oznacza
+									;   bonus kompensacyjny
+]
+...									;powtórzenie w nowej linii
+
+	
+
+
+- CBonus::ustawBonusCzasowy() ustawia tak¿e czas przeniesiony
+- CPlanTaryf::_constructPlanTaryfL() pomiñ etap EBonusKwota
+- CPlanTaryf::_constructBonusL() - ustawia wczytany tak¿e czas przeniesiony, pomija etap wczytywania kwot; b³¹d wczytania 3ciego tokena jest przyjmowany jako wart. zerowa na potrzebê upgrade z wersji <=0.91(xx)
+- CPlanTaryf::nowyOkresRozliczeniowy() - nie zapisuje TPlanTaryfSettings
+- CKontrAppUi::HandleCommandL() - zapisuje/³aduje TPlanTaryfSettings podczas zapisywania/nie zapisywania ELOG.TXT
+
+
+2003.08.04
+CBonus:
+- usuniêcie niewykorzystanej iPrzeniesionyPierwszy;
+- dodanie iTyp wraz z enum okreœlaj¹cym typ bonusa
+- dodanie ustawTypBonus(), pobierzTypBonus()
+- dodanie iPoczSMS,iSMSsztuki, iSMSprzeniesiony, iSMSprzelicznik - dla bonusa SMS
+- nowa CBonus::ustawBonusSMS(),CBonus:pobierzBonusSMS()
+- modyfikacja konstruktora - domyœlnie typ bonusa EBonusVoice
+- modyfikacja odliczBonusCzasowy() - kontrola wywo³ania metody dla w³aœciwego typu bonusa == EBonusVoice (i w przysz³oœci EBonusVoiceSMS)
+- modyfikacja SaveL() - zapis typu i liczników bonusa SMS
+Zmiana formatu ELOG.TXT:
+[bonus_id <TAB>	typ_bonusa <TAB> opis dowolny bonusa				;typ bonusa Int mapowany na enum TTypBonus
+                [+][-]czas  <TAB>  krok_czasowy	<TAB> przeniesiony_czas		;Int,Int,Int wartoœæ ujemna "czas" oznacza  bonus kompensacyjny
+		ilosc_sms <TAB> przelicznik_na_czas <TAB> przeniesione_sms	;Int,Int,Int							;  
+]
+...									;powtórzenie w nowej linii
+
+
+
+- zmiana CPlanTaryf::_constructBonusL()
+a) czytanie typu bonus
+b) usuniêcie taryfy ulgowej z 2003.08.03 dotycz¹cej b³edu czytania 3ciego tokena - konwerter MUSI BYÆ PRECYZYJNY
+c) zamiana etapu EBonusKwota na EBonusSMS - i ustawianie wartoœci bonusów SMS
+- CPlanTaryf::_constructPlanTaryfL() zamiana etapu EBonusKwota na EBonusSMS po EBonusCzas ad c)
+
+- TKontrFormsData - nowe pola iVal1,iVal2,iVal3 dla bonusów SMS oraz iDuration1 dla minut przeniesionych z poprzedniego okresu rozliczeniowy
+- CKontrForms::HandleControlStateChangeL() - zmiana widocznoœci elementów formularza Bonus w zale¿noœci od wybranego typu
+
+DO ZROBIENIA:
+1) ZAMIANA EDYTORÓW EDWIN02-04 NA EDYTORY NUM
+2) INICJALIZACJA EDYTORÓW W USTAWPOLAFORMULARZABONUS()
+3) MODYFIKACJA SAVEFORM() I DONOTSAVEFORM() 
+4) KONCEPCJA WYKORZYSTANIA NIEZMIENIONEGO CTARYFIKATOR DLA POTRZEB SMS (PROBLEMY PODCZAS ODLICZANIA BONUSA I POTENCJALNE PRZY SMS,GPRS)
+
+
+2003.08.05
+- zmiana CKontrForms::HandleControlStateChangeL() - wygaszanie Voice przy wybraniu SMS only, zmiana na edytory number
+- zmiana CKontrForms::SaveFormDataL() i DoNotSaveFormData() - obs³uga nowych pól formularza wraz z kontrol¹ zakresu
+- DoNotSaveFormData() - zerowanie pól nieistotnych dla wybranego typu bonusa
+- zmiana TKontrFormsData - iPop1,iPop2 TInt a nie TBool
+- zmiana CKontrContainer::NowyOkresRozliczeniowyL() - iPop1,iPop2 na 1 a nie ETrue
+- SaveFormData() - zapisuje wartoœci TInt do iPop1,iPop2
+- SaveFormData(),DoNotSaveFormData() - zapis przeniesionych minut 
+- CKontrForms::OfferKeyEventL() blokada lewo/prawo dla kontrolki "typ bonus" i "transfer bonus" ze wzglêdu na problemy w ukrywaniu/pokazywaniu opcjonalnych elementów
+- nowa CKontrForms::ustawWidocznoscWgOpcji() i zmiana CKontrForms::HandleControlStateChangeL() w zwi¹zku z tym; 
+- wo³anie ustawWidocznoscWgOpcji() z DoNotSaveFormData() aby odtworzyæ wygl¹d formularza na podstawie "cofniêtych" wartoœci; dodanie TryChangeFocusToL aby pozycjonowaæ na elemencie odpowiedzialnym za wybór opcji
+
+
+- zmiana CKontrolka::_edycjaBonusL() - przekazywany tylko wskaŸnik CBonus, reszta parametrów wy³uskiwana wewn¹trz; pobieranie i ustawianie wszystkich typów bonus
+- zmiana CKontrolka::_edycjaElementuL() i  CKontrolka::dodawajBonusL() - zwi¹zana z w/w modyfikacj¹
+- zmiana CBonus::pobierzBonusCzasowy() zwraca tak¿e czas przeniesiony
+
+
+
+2003.08.06
+Nowa klasa CTaryfikatorProsty dla taryfikacji SMS,MMS i GPRS
+- Bonus.h - enum nazwane TTypBonus na potrzeby rozró¿nienia dla CTaryfikatorProsty
+- poprawa CTaryfikator::ConstructL() - new (ELeave) zamiast new
+
+
+
+2003.08.07
+Przystosowanie CSMS do nowego CTaryfikatorProsty
+
+- modyfikacja Taryfikator.h oraz Taryfikator.cpp,PlanTaryf.cpp,TaryfikatorProsty.cpp - sta³e KAllPrefix itp. przeniesione do pliku "StaleTaryfikatora.h" i za³¹czane przez #include na poziomie *.cpp
+
+CPlanTaryf:
+- modyfikacja CPlanTaryf - nowe etapy w enum EEtap zwi¹zane z wczytywaniem SMS
+- nowa CPlanTaryf::_constructSMSL(TLex& aLex)
+- modyfikacja CPlanTaryf::_constructPlanTaryfL() uwzglêdniaj¹ca w/w
+- nowa CTaryfikatorProsty* iAktTaryfikatorProsty
+- CPlanTaryf::czyscPlanTaryfL() - inicjowanie pominiêtego iAktZbior, inicjowanie iAktTaryfikatorProsty; utworzenie obiektu CSMS
+
+Zmiana formatu ELOG.TXT zwi¹zana z ³adowaniem SMS:
+
+@ <TAB> sms
+          ilosc  <TAB>  kwota[.00000]  <TAB>  [ [bonus_id]...]		;ilosc = 1, obowi¹zkowa jednostka taryfikatora Int,TMoney
+                                [+][*][#]numer_telefonu			;obowi¹zkowy numer telefonu
+									;   musi byæ bez ¿adnego separatora mo¿e zawieraæ ()
+                                [ [+][*][#]numer_telefonu ]		;opcjonalne i powtarzane w nowych liniach numery
+                                ...					
+
+         [  ilosc  <TAB>  kwota[.00000]  <TAB>  [ [bonus_id]...]  ;opcjonalne taryfikatory powtarzane w nowych liniach
+				... ] 
+
+
+
+- zmiana CPlanTaryf::_DBMSstartUpdateL() - usuniêcie wyboru tylko Voice do rozliczenia, zmiana definicji view dbms
+- zmiana CKontrDBMS::getRecordL() - zwraca tak¿e typ rekordu i liczniki GPRS
+- zmiana  CPlanTaryf::_DBMSprocessRecordL() - rozliczanie wg typu zwróconego rekordu
+- nowa CBonus::odliczBonusSMS()
+- modyfikacja CBonus::nowyOkresRozliczeniowy() - chwilowo bez przenoszenia SMS na poprzedni okres
+
+
+
+DO ZROBIENIA:
+1) PRZENOSZENIE SMS NA NOWY OKRES ROZLICZENIOWY
+2) PRZEMYŒLENIE CZY DLA EBONUSvOICESMS CZAS POWINIEN == PRZELICZNIK_SMS * ILOSC_SMS I W ZWI¥ZKU Z TYM ODPOWIEDNIE BLOKADY/KOREKTY NA POZIOMIE FORMULARZA BONUS
+
+
+2003.08.08
+CBonus:
+- nowa iCzasDlaSMS - przechowuj¹ca czas bêd¹cy podstaw¹ do pomniejszenia po przeliczeniu na ekwiwalent SMS
+- zmiana  CBonus::odliczBonusCzasowy() - odliczanie tak¿e dla typu EBonsusVoiceSMS
+- modyfikacja NowyOkresRozliczeniowy - inicjowanie iCzasDlaSMS, przenoszenie bonusów w oparciu o now¹ metodê n/w
+- nowa CBonus::przeniesBonusNaNastOkres(TBool aPierwszyAktualny,TBool aDodajDoPoprzednich, const TInt& aAktual,const TInt& aPocz, TInt& aPoprz) - wyodrêbnina czêœæ do przenoszenia bonusów z nowyOkresRozliczeniowy()
+
+2003.08.09
+- korekta b³êdu CBonus::przeniesBonusNaNastOkres()
+- zmiany  CBonus::ustawBonusCzasowy() i CBonus::ustawBonusSMS() - inicjowanie liczników do rozliczeñ jako suma pocz+przeniesionej wartoœci
+- CBonus::nowyOkresRozliczeniowy() - kontrola max wartoœci bonusa czasowego do 23h59m59sek
+
+CKontrolka - wprowadzenie nowych elementów zwi¹zanych z SMS'ami:
+- nowe ESMS,ESMSTaryfa
+- CKontrolka::pobierzOpisKomorkiL() - opis ESMSTaryfa
+- CKontrolka::Draw() - rysowanie elementów 
+- CWezel::ustawOpisTypL() - kolorystyka nowych elementów
+- CKontrolka::dodajKomorkeL() - kontrola poprawnoœci i aktywnoœæ dodawanej ESMS lub ESMSTaryfa
+- CKontrContainer::inicjujKontrolkeL() - przy konstrukcji dla GUI dodaj tak¿e korzeñ SMS (ESMS)
+- CKontrolka::rysujPiktogram() - ESMSTaryfa identycznie jak ETaryfa
+- CKontrolka::aktywnoscWezlaL() - rozwijanie/zwijanie
+
+- CPlanTaryf::_constructSMSL() - wywo³ywanie _GUIdodajElement() dla wizualnej reprezentacji elementów, oraz konstrukcja wizualnego korzenia
+- CKontrolka::pobierzRodzica() - modyfikacja dla wielu wariantów (tak¿e póŸniejszych)
+- CKontrolka::dozwolonaPozycjaWstawiania()
+a) zwraca tak¿e typ taryfikatora do wstawienia na podstawie po³o¿enia kursora  
+b) przyp ERamka: ostatni element drzewka to na tê chwilê ju¿ SMS wiêc usuñ tê kontrolê
+- CKontrolka::dodawajTaryfikatorL() - dodaje taryfikator wg typu na wybranej pozycji (CTaryfikator czy CTaryfikatorProsty)
+- CKontrolka::dodajKomorkeL() decyzja dodania wg typu wskazanej komórki
+- CKontrolka::Draw() - wykorzystuj¹c zwrócony typ_do_wstawienia mo¿na dopasowaæ offset kursora wstawiania w zale¿noœci od rodzaju taryfikatora; nie rysuj znacznika nawigacji dla taryfikatora SMS
+
+- CKontrolka::dozwolonaPozycjaUsuwania() - zabronione usuniêcie korzenia SMS, odpytanie o mo¿liwoœæ usuniêcie taryfikatora SMS
+- CKontrolka::usuwajKomorkeL() - usuwa tak¿e taryfikator SMS
+
+- CPlanTaryf::_test() - test CSMS,CKontrContainer::PlanTaryfTestL() i CSMS::_test() nowy komunikat (id==12) o braku taryfiaktorów SMS oraz CKontrolka::pokazBledyLogiczneL() - dla wizualizacji b³êdu
+-  CKontrolka::rysujPiktogram() - nowy piktogram dla ESMS
+
+DO ZROBIENIA (CKontrolka):
+1) EDYCJA TARYFIKATORA SMS (OKIENKO TARYFIKATORA)
+2) WIZARD - DODANIE DOMYŒLNEGO SMS
+
+
+
+2003.08.10
+CKontrolka c.d. z 2003.08.09
+- nowa iTaryfikatorProsty, inicjalizacja w CKontrolka::czyscKontrolkeL()
+- CKontrolka::_edycjaTaryfikatoraL() - wystartowanie edycji wg typu taryfikatora
+- nowa CKontrolka::rysujOknoTaryfikatora() odpowiedzialna za wyrysowywanie okienka dla CTaryfikatorProsty
+- modyfikacja Draw() - decyduje o typie rysowanego okienka edycji taryfikatora na podstawie aktywnego obiektu poddanego edycji
+- CKontrolka::_edycjaElementuL() - za³¹czenie edycji tak¿e dla taryfikatora SMS
+
+DO ZROBIENIA
+... REAKCJA NA OPTIONS->LINK...
+... REAKCJA NA JOYSTICK CENTER
+... WIZUALIZACJA œWINKI/BANKNOTU
+... KONCEPCJA PREZENTACJI WIÊCEJ NI¯ JEDNEGO PREFIXA ? (DO MAX 5CIU ?)
+... KONCEPCJA PREZENTACJI PIKTOGRAMU (TELEFONU,KOPERTKI LUB BRAK? )
+... "All numbers" I WSZÊDZIE GDZIE WYSTÊPUJE DO RESOURCE'A
+... WYGASZANIE PODMENU Advanced PODCZAS EDYCJI TARYFIKATORA
+... TITLE PANE DLA EDYCJI TARYFIKATORA SMS
+... TITLE PANE PODCZAS LINKOWANIA (NP. ADD/DEL LINK TO PREFIX; ADD/DEL LINK TO DISCOUNT JAKO 2 RÓ¯NE WARIANTY)
+... TEKST NA NAVI PANE (na Voice & SMS ? lub bez tekstu ?)
+... WIZUALIZACJA PREFIXU(PREFIXÓW) NA TARYFIKATORZE SMS (TYLKO 1 CZY KILKA NA POWIÊKSZAJ¥CYM SIÊ OKIENKU?)
+
+
+2003.08.11
+- nowa  CTaryfikatorProsty::pobierzTyp() zwracaj¹ca typ taryfikatora (ETypTaryfikator)
+- zmiana CKontrolka::_edycjaElementuL() - po Enter/Ok ta metoda wywo³uje odpowiednie dialogi w zale¿noœci od typu aktualnie edytowanego taryfikatora
+- modyfikacja CTaryfikatorProsty::jestBonus() - argument NULL to pytanie o jakikolwiek dowi¹zany bonus
+- CKontrolka::rysujOknoTaryfikatorProsty() - piktogram œwinki/banknotu
+- CKontrolka::_linkTaryfikatora() - obs³uga wg typu edytowanego taryfikatora
+- dodana overload CKontrolka::_linkTaryfikatoraInnego() - dla sprawdzania CTaryfikatorProsty;
+- modyfikacja pierwotnej CKontrolka::_linkTaryfikatoraInnego() - sprawdzanie typu taryfikatora przed rozpatrywaniem
+- CKontrolka::_edycjaElementuL() - dodanie/usuniêcie linku prefixu/bonusa wg typu edytowanego taryfikatora
+- modyfikacja CKontrolka::Draw() - wizualizacja add/del/mov dla ka¿dego typu taryfikatora
+
+2003.08.12
+modyfikacje CKontrolka::rysujOknoTaryfikatoraProsty
+a) czerwony piktogram prefixu telefonu i "?" gdy brak linkowanego numeru
+- zmiana CKontrolka::pobierzOpisKomorki() - do³¹czona identyfikacja wielu dowi¹zanych linków prefixów
+- CKontrolka::_edycjaTaryfikatoraL() - Status Pane zale¿ny od typu taryfikatora
+- nowa CKontrolka::jestEdycjaTaryfikatoraProstego()	
+- Kontrolka.h - nowy stan dla CKontrContainer::_stanTaryfikatoraL() - ETaryfikatorProsty - dla odpytania o typ edytowanego taryfikatora
+- usuniêcie modyfikacji Status Pane dla taryfikatorów z tej klasy (CKontrView::HandleCommandL())
+- CKontrContainer::OfferKeyEventTRAPL() - usuniêcie reakcji na ESC dla emulatora (zakoñczenie edycji taryfikatora)
+- CKontrolka::_edycjaElementuL() - poprawa wywo³ania _edycjaTaryfikatoraL() na enum a nie wartoœæ !!!
+- CKontrContainer::_stanTaryfikatoraL() - ustawia oddzielne Status Pane dla linku prefixu i linku bonusa
+- CKontrView::DynInitMenuPaneL() - blokada menu zaawansowane podczas edycji taryfikatora prostego
+
+- CKontrolka::Draw() - teksty linkowania (add/del/mov) do resource
+- CKontrolka::pobierzOpisKomorkiL(),CKontrolka::rysujOknoTaryfikatorProsty() - "All numbers" z resource
+- CKontrolka::_edycjaElementuL() - "Attention !..." z resource
+
+
+- nowe CSMS::usunNumerTaryfikatorow() i CSMS::usunBonusTaryfikatorow()
+-  CPlanTaryf::usunNumer(),CPlanTaryf::usunBonus() - usuñ tak¿e link na numer/bonus we wszystkich taryfikatorach SMS
+
+
+2003.08.13
+Modyfikacje CKontrContainer zwi¹zane ze zmian¹ wygl¹du rachunku:
+- nowa iOffset odpowiedzialna za przesuniêcie rachunku na ekranie
+- CKontrContainer::_daneBillingoweL() inicjowanie iOffset
+-  CKontrContainer::OfferKeyEventL() - scrollowanie z kontrol¹ zakresów podczas wyœwietlania rachunku
+- CKontrContainer::drawBillingL() - rysowanie oparte o aktualny iOffset
+- nowe initScrollL(),updateScrollL(),iScroll oraz iScrollModel - dla wskaŸników scrollowania
+- CKontrContainer::ConstructL() i destruktor - zarz¹dzanie obiektem iScroll
+- CKontrContainer dziedziczy dodatkowo z  MEikScrollBarObserver + HandleScrollEventL()
+- nowa CKontrContainer::drawChart() - rysowanie wykresu ko³owego podzia³u kosztów wg typów
+- CKontrContainer::drawBillingL() - zmiana kolejnoœci linii + w/w
+
+
+DO ZROBIENIA
+1) TEKSTY Z drawBillingL() DO RESOURCE
+2) ZMIENNE iStatXXXX DLA SMS W CPlanTaryf
+3) MODYFIKACJE WYGL¥DU LISTY POPUP DLA DISCOUNT'S USAGE (ROZBICIE WSPÓLNEGO VOICE&SMS NA 2 POZYCJE)
+4) ZMIANY drawBilling() ROZBICIE VOICE I SMS + WYKRES KO£OWY
+
+
+2003.08.14
+- nowe zmienne iStatSMSxxx w CPlanTaryf
+- CPlanTaryf::czyscPlanTaryfL(),CPlanTaryf::nowyOkresRozliczeniowy(),CPlanTaryf::_DBMSstartUpdateL() - inicjalizacja w/w
+- CPlanTaryf::_DBMSprocessRecordL() - rozgraniczenie liczenia statystyki ze wzglêdu na typ
+- CKontrContainer::drawChart(),CKontrContainer::drawBillingL() - obs³uga nowych iStatSMSxxxx
+- CKontrContainer::drawChart() - kolory jako argumenty
+
+- modyfikacja CTaryfikatorProsty::obliczKoszt(),CSMS::obliczKoszt() - modyfikuje tak¿e sumaryczny licznik p³atnych SMSów
+- modyfikacja CPlanTaryf::obliczKosztSMS() zwi¹zana z w/w
+
+- CKontrContainer::drawBillingL() - teksty z resource'a
+- pusty tytu³ zak³adki dla view "Billing scheme"
+
+2003.08.16
+- modyfikacja CKontrContainer::drawBillingL() - wyrysowywanie bonusów na ekranie rachunku
+- nowa CBonus::pobierzBonusSMSWykorzystanie()
+- nowa iOffsetMin (KontrContainer.h) i zmiany CKontrContainer::_daneBillingoweL(),CKontrContainer::OfferKeyEventTRAPL(),CKontrContainer::updateScrollL() uwzglêdniaj¹cy zmienny obszar do scrollowania
+- CKontrContainer::_daneBillingoweL() zakrycie komendy MORE - UWAGA! KOD DO WYKORZYSTANIA DO INNEGO CELU W PRZYSZ£OŒCI
+
+- CKontrolka::pobierzOpisKomorkiL(), CKontrolka::rysujJednostkeTaryfikatora() - zmiana ci¹gu formatuj¹cego czas trwania taryfikatora (wiod¹ce zero dla sekund)
+
+
+2003.08.17
+Zmiany zwi¹zane z wprowadzeniem popup (wybór voice,sms lub wszystko) do formularza Report Criteria:
+
+- Raport.h - nowy enum EConnType mapowany na pola formularza popup ReportsCriteria
+- nowa CRaport iRaportConn zawiera typ po³¹czeñ dla raportów dla których numer tel. ma sens (czyli nie GPRS ale voice,sms itd), inicjalizacja w c'tor
+- TRaportKryteria - nowe pole przechowuj¹ce iRaportConn
+- modyfikacje zwi¹zane z w/w:CRaport::pushKryteriaL(),CRaport::popKryteriaL(),CRaport::packKryteriaL(),CRaport::un_packKryteria()
+- CRaport::raportKryteriaL() - powi¹zanie pola iPopup1 z iRaportConn
+
+- zmiany CKontrForms::SaveFormDataL(),CKontrForms::DoNotSaveFormDataL() zwi¹zane z obs³ug¹ nowego pola iPopup1 mapowanego na CRaport::iRaportConn
+- CRaport::raportStartL() - raporty number,date,cost wg typów po³¹czeñ ustalonych w formularzu
+- Raport.h - nowe ikonki KIconXXX dla Voice i SMS
+- CRaport::raportStartL() - do³¹cz ikonki dla identyfikacji typu po³¹czenia
+-  CKontrContainer2::listBoxSetGraphicIconL(),CKontrContainer2::listBoxGraphicIconL() do³¹czenie ikonek
+-  CKontrContainer::listBoxSetGraphicIconL(),CKontrContainer::listBoxGraphicIconL() do³¹czenie ikonek
+
+Usuniêcie ostrze¿eñ kompilatora "unreachable code"
+- CTaryfikator::dodajJednostkeL() - TUint aCzas nigdy nie bêdzie < 0
+- CKontrolka::dozwolonaPozycjaUsuwania() - komentarz do ostrze¿enia
+- CKontrAppUi::HandleKeyEventL() - usuniêcie martwego bloku kodu
+
+DO ZROBIENIA:
+1) WIZARD - SMS'Y
+2) PRZESUNIÊCIE PLIKÓW PROGRAMU Z \DOCUMENTS DO KATALOGU PROGRAMU (\KONTR)
+
+
+
+2003.08.18
+- likwidacja oddzielnych raportów ERaportTimeNumber i ERaportSMS - jeden raport ERaportTime parametryzowany wg iRaportConn:
+a) Raport.h - zmiany w enum TRaport
+b) modyfikacja CRaport::raportStartL() 
+c) CRaport::raportDetaliL() - wybór raportu inicjowanego z poziomu raportów CountXXX wg wspólnego ERaportTime i typu ustawionego w iRaportConn
+
+- nowy domyœlny argument CKontrolka::dodawajBonusL() i CKontrolka::_edycjaBonusL() okreœlaj¹cy typ nowo dodawanego bonusa
+- modyfikacja  CKontrolka::WizardL() - dodawanie SMS wraz z bonusami
+- nowa CKontrolka::WizardEditTaryfikatorProstyL() dla edycji ceny i linku bonusa dla SMS
+
+
+WERSJA OTRZYMUJE ID 0.92(18) !!!
+
+Zmiany zwi¹zane z przeniesieniem plików programu z \Documents do folderu w którym jest zainstalowany:
+- zmiany eLog_En.pkg
+- PlanTaryf.h,TPlanTaryfSettings::doSaveSettingsL(),TPlanTaryfSettings::doLoadSettingsL(),CDump.H,Raport.H,CKontrDBMS.CPP
+- CKontrAppUi::ConstructL() - zwi¹zane z SetCopierOptions() eCommonEngine Psiloc'u
+
+2003.08.22
+
+WERSJA 0.92(22)
+- CKontrolka::_edycjaTaryfikatoraL() ponowne za³¹czenie podmiany napisów CBA (Link,Back) dla czytelnoœci
+- modyfikacja CBonus::odliczBonusSMS() - jeœli przelicznik SMS jest == 0 to traktuj wspólny bonus Voice&SMS jako 2 rozdzielne czêœci - innymi s³owy poprawa b³êdu polegaj¹cego na "po³ykaniu" wszystkich SMSów
+
+
+2003.08.25
+WERSJA 0.92(25)
+- modyfikacja TMoney::Format() - zwracaj informacjê przy formatowaniu z dok³. do 2 miejsc po przecinku o kwocie mniejszej ni¿ pe³en 1 grosz
+- modyfikacja CKontrDBMS::viewRecordDetailL() - tak aby w w/w sytuacji pokazaæ koszt z pe³n¹ dok³adnoœci¹ do 5 miejsc po przecinku
+
+- eCommonEngine w wersji 1.10, zmiana sta³ej 96 w CKontrAppUi::ConstructL() na EPPS60eLog z eCommonIds.h
+
+
+- CKontrolka::_edycjaElementuL() - nowy dialog edycji doby Weekend
+DO ZROBIENIA:
+1) DOKOÑCZENIE EDYCJI DNI WEEKENDU
+2) MODYFIKACJE W CPLANTARYF ZWI¥ZANE ZE ZMIENN¥ WARTOŒCI¥ iOstatniDzienRoboczy
+3) ZAPIS I ODCZYT UWZGLÊDNIAJ¥CY PARAMETR iOstatniDzienRoboczy
+4) MODYFIKACJE CONVERTELOG.EXE ZWI¥ZANE Z NOWYM PARAMETREM
+
+2003.08.26
+WERSJA 0.92(26)
+- nowe 	Cplantaryf::pobierzOstatniDzienRoboczy(),CPlanTaryf::ustawOstatniDzienRoboczy(TInt aDzien) oraz iOstatniDzienRoboczy jako TInt
+- CKontrolka::_edycjaElementuL() - kontynuacja edycji dni weekendu
+- modyfikacja CPlanTaryf::czyscPlanTaryfL(),CPlanTaryf::_test(),CPlanTaryf::jakiDzien() - referencje iOstatniDzienRoboczy dostêpne za pomoc¹ odpowiednich metod
+
+
+ZMIANY W ELOG.TXT ZWI¥ZANE ZE ZMIENN¥ ILOŒCI¥ DNI ROBOCZYCH:
+@ <TAB> day
+	[nr_ostatniego_dnia_roboczego]					;liczony od ZERA - opcjonaly (default 4 - Pi¹tek)
+        [dzieñ_miesi¹c_w_notacji_rzymskiej]				;tylko du¿e litery, dozwolony <TAB> miêdzy
+	...								;   dniem a miesi¹cem					
+
+  
+- CPlanTaryf::_constructDobaL() przypadek EData - ustawianie dnia roboczego
+- CPlanTaryf::_FILEstartSaveL() zapis dnia roboczego
+
+
+2003.08.27
+WERSJA 0.92(27)
+- modyfikacja przyp EDobaKoniec w CPlanTaryf::_constructPlanTaryfL() - koniec konstrukcji doby powoduje utworzenie kontenera SMS
+- zmiany w CPlanTaryf::_constructSMSL() - dodany przypadek EDobaKoniec z przesuniêciem tworzenia kontenera z przypadku ESMSTaryfikator;
+w/w zmiany spowodowane s¹ b³êdem jaki powstaje w sytuacji gdy ELOG.TXT nie posiada ¿adnego taryfikatora SMS wiêc kontener nie jest utworzony
+- CKontrolka::dodajKomorkeL() sprawdzanie hierarchii dodawania nie obowi¹zuje typu ENumerGrupa i ENumerTel i b³êdy konstrukcyjne podczas ³adowania pliku powodowa³y ukrycie sortowanych na zakoñczeniu numerów
+
+- CKontrolka::_edycjaElementuL() - pauza 0.5 sek po zwiniêciu okienka z edycj¹ dni weekendu
+
+- zmiana CKontrAppUi::ConstructL() - nowa wersja wyd³u¿a czas TRIAL i okres wa¿noœci 21 + 7 dni z ostrze¿eniem
+
+- modyfikacja CPlanTaryf::_FILEstopLoadL() - tolerowanie b³êdów logicznych przesuniête do ostatniego kontenera, czyli z EDobaKoniec na ESMSTaryfikator; sprawdzanie w oparciu o etap konstrukcji a nie numer doby
+
+

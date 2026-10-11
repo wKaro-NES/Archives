@@ -1,0 +1,332 @@
+2003.01.24
+Stan obecny:
+	- konstrukcja pe³nego planu taryfowego z pliku tekstowego PLANTARYF.TXT
+	- testy obliczeniowe na podstawie danych zgromadzonych na koñcu pliku tekstowego PLANTARYF.TXT
+	- ograniczone testowanie zdolnoœci do wspó³dzia³ania (poprawnoœci konstrukcji) obiektów planu taryfowego
+	- przetwarzanie numerów telefonicznych na zasadzie najd³u¿szego zgodnego prefixu
+	- przetwarzanie rozmów przebiegaj¹cych przez granice dni, ramek czasowych, taryfikatorów
+	- wyzwalanie listy bonusów w taryfikatorze 
+
+Do zrobienia:
+	- brak liczenia bonusów kwotowych
+	- brak zaokr¹gleñ do setnej czêœci podczas liczenia kosztów
+	- brak zaokr¹gleñ do pe³nej sekundy podczas przetwarzania czasów
+	- brak obs³ugi Leave podczas konstrukcji i podczas obliczeñ
+	- brak mo¿liwoœci przerwania d³ugich obliczeñ
+
+
+Format pliku PLANTARYF.TXT , dodatkowe znaki na potrzeby opisu formatu: 
+	[] - opcjonalny element
+	; - komentarz 
+	<TAB> - obowi¹zkowy separator "bia³a spacja"
+	<SP> - obowi¹zkowy separator tylko spacja 
+	... - dany element mo¿e byæ powtórzony
+Opis:
+
+
+[bonus_id <TAB>	opis dowolny bonusa
+                [+][-]czas  <TAB>  krok_czasowy				;Int,Int wartoœæ ujemna "czas" oznacza
+									;   bonus kompensacyjny
+                kwota[.00]  <TAB>  krok_kwotowy[.00]			;Real,Real
+]
+...									;powtórzenie w nowej linii
+
+
+@ <TAB> opis dowolny doby œwi¹tecznej
+        [dzieñ_miesi¹c_w_notacji_rzymskiej]				;tylko du¿e litery, dozwolony <TAB> miêdzy
+	...								;   dniem a miesi¹cem					
+
+        GG:MM:SS  <TAB>  GG:MM:SS					;obowi¹zkowa ramka czasowa od <TAB> do
+
+                czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...]	;obowi¹zkowa jednostka taryfikatora Int,Real
+									;   powtórzenie bonusa w tej samej linii
+                [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id] ...] ]	;opcjonalne jednostki taryfikacyjne
+		...							;   powtarzane w nowych liniach
+		
+                                [+][*][#]numer_telefonu			;obowi¹zkowy numer telefonu
+									;   musi byæ bez ¿adnego separatora mo¿e zawieraæ ()
+                                [ [+][*][#]numer_telefonu ]		;opcjonalne i powtarzane w nowych liniach numery
+                                ...					
+
+                [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...] ]	;opcjonalne taryfikatory powtarzane w nowych liniach
+                  [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...] ]
+                  ...		
+                                [+][*][#]numer_telefonu			
+                                [ [+][*][#]numer_telefonu ] 		
+                                ...					
+                ]
+                ...							
+
+
+        [ GG:MM:SS  <TAB>  GG:MM:SS					;opjonalna ramka czasowa od <TAB> do,reszta j/w
+                czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...]	
+                [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id] ...] ]	
+		...							
+                                [+][*][#]numer_telefonu			
+                                [ [+][*][#]numer_telefonu ]		
+                                ...					
+                [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...] ]	
+                  [ czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...] ]
+                  ...		
+                                [+][*][#]numer_telefonu			
+                                [ [+][*][#]numer_telefonu ] 		
+                                ...					
+                ]
+                ...							
+        ]
+        ...
+        
+@ <TAB> opis dowolny doby weekendowej			;definicje identyczne z dob¹ œwi¹teczn¹ z pominiêciem dat rzymskich
+@ <TAB> opis dowolny doby roboczej
+@ <TAB> opis dowolny doby codziennej
+
+@ <TAB> dowolny opis testów obliczeniowych		;lista numerów do testów
+[+][*][#]numer_telefonu  <TAB>  czas_trwania  <TAB>    DD/MM/RRRR <SP> GG:MM:SS     ;Int, separatorem w dacie jest spacja!
+...
+
+
+
+2003.01.25
+	- dodane NewL, NewLC, ConstructL w CNumer; uzupe³nienie sufixów L
+	- dodane NewL, NewLC, ConstructL w CTaryfikator; uzupe³nienie sufixów L
+	- usuniêty zbêdny parametryzowany konstruktor w CRamkaCzas; uzupe³nienie sufixów L
+	- CDoba uzupe³nienie sufixów L
+	- dodane NewL, NewLC, ConstructL w CPlanTaryf; uzupe³nienie sufixów L
+
+2003.01.26
+	- w CTaryfikator i w CPlanTaryf konstruktory zosta³y oznaczone jako prywatne
+	- we wszystkich klasach destruktory nie s¹ wirtualne (oszczêdnoœæ na vtable ?)
+	- w CTaryfikator::obliczKoszt() dodana obs³uga jednostki 0/0
+	- poprawa asercji i _test() aby wy³apywaæ tylko jednostki o czasie <0
+	- w CTaryfikator::dodajJednostkeL() wprowadzone zaokr¹glenia kwoty do 2 miejsc po przecinku
+	- w CTaryfikator dodane pole iOkres i metoda ustawOkres()
+	- w zwi¹zku z powy¿szym poprawiona metoda obliczKoszt() uwzglêdnia okresowoœæ jednostek taryfikacyjnych
+	  oraz metoda CPlanTaryf::_constructRamkaL() przypadek ERamkaTaryfikator
+
+Zmiana w formacie pliku PLANTARYF.TXT w zwi¹zku z okresem jednostek taryfikacyjnych:
+- definicja danych taryfikatora:
+
+	[~]czas  <TAB>  kwota[.00]  <TAB>  [ [bonus_id]...]
+
+
+
+2003.02.03
+	- w CDoba dosz³y metody dodajBonusyDoby() i usunBonusyDoby()
+	  oraz zmiana metody dodajRamkeCzas() uwzglêdniaj¹ca przepisywanie bonusów do ramki
+	- w CRamkaCzas dosz³y analogiczne metody dodajBonusRamki() i usunBonusRamki()
+	  oraz zmiana metody dodajTaryfikator() przepisuj¹ca obowi¹zuj¹ce w ramce bonusy dla 1szej jednostki taryfikacyjnej
+	- w metodach tych zastosowano kaskadowe dodawanie i usuwanie wraz z zabezpieczeniami na duplikaty
+	
+DO ZROBIENIA:
+1) zmiana formatu definicji ramki czasowej w PLANTARYF.TXT
+
+        GG:MM:SS  <TAB>  GG:MM:SS  <TAB>  [ [bonus_id]...]		; opcjonalne bonusy obowi¹zuj¹ce dla ka¿dego taryfikatora w ramce czasowej
+2) zmiana formatu definicji doby w PLANTARYF.TXT ???
+
+2003.02.03
+	* do³¹czenie modu³ów obliczeniowych do interfejsu graficznego poprzez:
+		- modyfikacje pliku KONTR.MMP - kopia TEST.MMP z modyfikacj¹ USERINCLUDE
+		- modyfikacje pliku TEST.CPP - "pusta" DoExampleL, komentarz na #include CommonFramework.h
+		   metoda LoadAndTestPlanTaryf(CKontrolka*) jest wywo³ywana z NULL dla trybu konsoli lub z wnêtrza CKontrCotainer
+		- nowa metoda CPlanTaryf::_GUIdodajElementL() konstruuj¹ca sieæ wizualnych obiektów tylko przy uruchomieniu w trybie graficznym (CKontrolka* <> NULL)
+		- w metodach _constructXXXX() po dump'ach dodane wywo³ania _GUIdodajElementL() na potrzeby konstrukcji
+
+	
+2003.02.08
+	- dodanie metody CRamkaCzas::ustawCzas(TTime& , TTime&)
+	- dodanie metody CDoba::dodajRamkeCzasL(TTime&, TTime&)
+	- modyfikacja _constructDoba(): metody _GUIdodajElement ustawiaj¹ rzeczywiste wskaŸniki
+	- modyfikacja CPlanTaryf::_loadPlanTaryf() na uniwersaln¹ czêœæ pozwalaj¹c¹ za³adowaæ plan lub za³adowaæ i wykonaæ testy na planie
+	- modyfikacja czêœci w TEST.CPP zwi¹zanych z w/w
+	- modyfikacja CPlanTaryf::_constructPlanTaryf() - wyrzucenie przypadku ETest
+	
+2003.02.11
+	- rozbicie etapów czytania pliku na wersjê pseudo wspó³bie¿n¹:
+		a) metody _startLoad() _processLine() _stopLoad()
+		b) konstrukcja dialogu progress z wykorzystaniem CIdle()
+		c) wywo³ywanie metody _processLine() z metody updateProgressBar() wo³anej jako CIdle()
+	- wyodrêbnienie metod globalnych startDUMPLoad....PlanTaryf() i stopDUMPLoadPlanTaryf() obs³uguj¹cych plik diagnostyczny
+
+
+2003.02.15
+	-modyfikacja CNumer::ustawNumerL() nie dokonuj¹ca alokacji pamiêci jeœli podany numer nie jest poprawny
+	-modyfikacja CPlantaryf:
+		a) nowy etap EDobaKoniec dla sygnalizacji koñca konstrukcji aby wygenerowaæ b³¹d jeœli plik mimo wszystko zawiera dodatkowe dane
+		b) tymczasowo wykomentowana modyfikacja dodajNumer() - metoda _GUIdodajElement() na tym etapie powoduje wizualizacjê nieposortowanych numerów tel.
+		c) tymczasowa konstrukcja numerów telefonicznych w _stopLoad() - zwi¹zany z w/w zrzut posortowanych numerów
+
+2003:02:17
+	-modyfikacja CNumer::ustawNumerL() - wzmocniona kontrola poprawnoœci dopuszczaj¹ca tylko 1 ze znaków +*# i tylko na pierwszej pozycji lub wcale
+	-do³¹czenie w CPlanTaryf::dodajSwietoL() wywo³ania _GUIdodajElement() na potrzeby wizualizacji dat
+
+2003:02:18
+	-modyfikacja typu iWykazSwiat z CArrayFixFlat<TTime> na RPointerArray<TTime> ze wzglêdu na potrzeby interfejsu graficznego
+	  (modyfikacja metod jakiDzien(), dodajSwietoL(), _test(), konstruktor i destruktor)
+2003:02:24
+	- dodano CTaryfikator::pobierzPrzewidzianyOkres() zwracaj¹c¹ aktualny(lub przewidywany) okres 
+
+2003:02:25
+	- dodano CTaryfikator::jestBonus() potwierdzaj¹cy istnienie lub nie dla aktualnej jednostki taryfikacyjnej dowolnego bonusa
+2003:02:26
+	- dodano CTaryfikator::pobierzIloscJednostek()
+	- dodano CTaryfikator::jestWskaznikNaNumer()
+
+2003:02:28
+	- dodano CTaryfikator::pobierzListeBonusL(TInt aNrJednostki) zwracaj¹c¹ CArrayPtrFlat<CBonus>* na listê bonusów danej jednostki taryfikacyjnej
+	- poprawiono b³¹d (?) w CTaryfikator::dodajBonus() - dopuszczalne istnienie duplikatów jako istota wyzwalania wielu bonusów dla jednej jednostki taryfikacyjnej
+2003:03:02
+	- dodano ponownie usuniêty CTaryfikator::jestBonus(TInt aNrJednostki,const CBonus* aBonus) odpowiadaj¹cy na pytanie czy aNrJednostki posiada konkretny aBonus albo dowolny aBonus == NULL
+2003:03:04
+	- dodano TJednostka* CTaryfikator::pobierzJednostkeDoModyfikacji() dla celów edycji jednostek taryfikacyjnych
+2003:03:07
+	- w CPlanTaryf::_FILEStartLoad():
+		 zmieniona lokalizacja plików z C:\EPOC32EX\DATA na C:\DOCUMENTS
+		 zmieniona nazwa pliku z danymi do obliczeñ z TEST.TXT na BILLING.TXT
+	- zmiana CPlanTaryf::_FILEStopLoad(TBool aError = EFalse) wymuszaj¹ca zamkniêcie kana³ów IO w razie b³êdu IO
+
+2003:03:08
+	- dodano tymczasowe zmienne w CPlanTaryf odpowiedzialne za przechowywanie danych na potrzeby statystyki (billingu)
+	  (iKosztAll,iKosztMin,iKosztMax,iKosztMinOpis,iKosztMaxOpis)
+	- modyfikacja konstruktora,destruktora oraz _FILEStartLoad() i _testyObliczeniow() zwi¹zane z w/w
+	- modyfikacja w _testyObliczeniowe() parsowania daty i czasu z pliku - dodanie lex.NextToken
+
+2003:03:09
+	- dodano CTaryfikator* CRamkaCzas::jestWskaznikNaNumer(const CNumer* aNumer) zwracaj¹c¹ NULL lub taryfikator posiadaj¹cy aNumer
+
+2003:03:10
+	- dodano uruchomienie _test() w CPlanTaryf::_FILEstopLoad() dla sprawdzenia poprawnoœci konstrukcji i mo¿liwoœci podjêcia decyzji przez u¿ytkownika
+	- dodano flagê w CPlanTaryf  iPlikPoprawnyLogicznie oznaczaj¹c¹ pomyœlny wynik _test() na za³adowanym pliku konstrukcyjnym
+	  (modyfikacja konstruktora i _FILEstartLoad() na potrzeby inicjalizacji w/w)
+
+	- skomentowane stemplem czasowym poprawki w CDoba::_test()
+	- dodane const RPointerArray<CNumer>* CTaryfikator::pobierzListeNumer() dla potrzeb CRamkaCzasowa::_test()
+	- rozbudowa CRamkaCzasowa::_test() pod k¹tem kontroli zdublowanych numerów w swoich taryfikatorach
+
+2003:03:21
+	- dodano TTime* CPlanTaryf::dodajSwietoL(const TTime& aData) dla potrzeb interfejsu graficznego
+	- dodano TInt CPlanTaryf::pobierzIloscNumerow()	jw
+	- dodano CNumer* CPlanTaryf::pobierzNumer(TInt aIndex)  jw
+
+2003:03:22
+	- poprawiono TTime* CPlanTaryf::dodajSwietoL(const TTime& aData,TBool& aExist) aby zwraca³a istniej¹cy adres daty i reagowa³a na b³êdy
+	- dodano void CBonus::pobierzBonusCzasowy(TInt& aCzas, TInt& aKrokCzas, TBool& aKompensacja)
+	- dodano TPtrC CBonus::pobierzBonusNazwa()
+	- dodano void CBonus::ustawBonusNazwaL(const TDesC& aNazwa)
+
+2003:03:27
+	- modyfikacje w CPlanTaryf zwi¹zane z obs³ug¹ DBMS (iBaza, metody _FILEStartLoad() , _FILEStopLoad() oraz _testyObliczeniowe())
+	- modyfikacje TEST.CPP - wyodrêbnienie w³¹czenia/wy³¹czenia dupmingu do logfile.txt
+
+
+2003:03:31
+	- dodana metoda TBool CPlanTaryf::jestOdpowiedzialny(const CNumer* aNumer)
+	- modyfikacja CPlanTaryf::obliczKoszt() - zwrot stopnia rozliczenia rozmowy
+	- modyfikacja CPlanTaryf::_testyObliczeniowe() - m.in test z wykorzystaniem metody jestOdpowiedzialny()	który decyduje o sensie rozpoczêcia obliczeñ dla numeru
+
+2003:04:01
+	- modyfikacja CPlanTaryf::obliczKoszt() - poprawa sprawdzania czasu rozpoczêcia i czasu trwania rozmowy po zakoñczeniu obliczania kosztu w CDoba
+		(tak¿e skrócenie czasu rozmowy o przeskakiwane nierozliczone godziny !)
+	- modyfikacja CDoba::jestOdpowiedzialna() - sprawdza odpowiedzialnoœæ nie dla konkretnej godziny ale ogóln¹ - czy s¹ ramki odpowiedzialne za rozliczenie
+		(zmiana pod k¹tem wy³apywania luk w rozliczeniach)
+	
+
+2003:04:05
+	Funkcjonalnoœæ obs³ugi danych billingowych ulega zmianie:
+		a) plan taryfowy jest konstruowany tak jak do tej pory: z pliku 
+		b) dane bilingowe zostaj¹ czytane z plku billing.txt i bez ¿adnych obliczeñ zostaj¹ umieszczone w DBMS (docelowo bêdzie to czytanie z logu telefonu)
+		c) obliczenia kosztów zostaj¹ wykonane w oparciu o dane w DBMS i aktualizowane w DBMS
+	Modyfikacje CPlanTaryf zwi¹zane z usuniêciem metody _testyObliczeniowe()
+	a) _FILEprocessLine() - wywo³uje dodan¹ _DBMSaddLogData() - dodanie "czystych" danych billingowych do DBMS
+	b) dodano metody _DBMSstartUpdateL(), _DBMSstopUpdate() i _DBMSprocessRecord() oparte na idei wspó³bie¿nego ³adowania (patrz metody _FILExxxx) a operuj¹ce tylko na DBMS
+	c) modyfikacje metod _GUILoadProgressBar() i _GUIUpdateProgressNote() aby wywo³ywaæ odpowiednie metody: _FILEprocessLine() lub _DBMSprocessRecordL()
+
+2003:04:07
+	- przeoczona modyfikacja CPlanTaryf::DialogDismissedL() zwi¹zana z obs³ug¹ _FILExxx() i _DBMSxxx()
+2003:04:08-10
+	Modyfikacje CPlanTaryf spowodowane implementacj¹ obs³ugi bazy danych poprzez Leave, przystosowaniem progress note do ob³sugi pliku,logu i dbms.
+	Porzucenie tymczasowych metod w test.cpp (startDUMPLoadxxxx i stopDUMPLoadxxx)
+	Modyfikacje metod DUMP zwi¹zane z otwarciem pliku logfile.txt na pocz¹tku pracy programu i jego zamnkniêciem na koñcu.
+	Modyfikacje metod DUMP o timestamp
+
+2003:04:13-17
+	Modyfikacje pod k¹tem ostrze¿eñ GCC i b³êdów zg³aszanych przez PETRAN podczas build dla innych procesorów (usuwania zmiennych statycznych,globalnych,itd.)
+	Modyfikacje CPlanTaryf zwi¹zane z implementacj¹ obs³ugi Log Engin'e:
+	- dodanie  metod _LOGstartImport,_LOGstopImport,_LogprocessEvent
+	- modyfikacja metod _GUIprogressXX zwi¹zane z nowym typem przetwarzania EProgressLogREAL
+	- modyfikacje metod _FILEstartLoad i przypadku EProgressLog zwi¹zane z uploadem danych z BILLING.TXT tak¿e do EventLoga (dla potrzeb emulatora)
+
+2003:04:18
+	- dodanie void usunJednostke(TInt& aNrJednostki);		//aNrJednostki - modyfikowany zwrotnie aby wskazywaæ na element w tablicy
+	- dodanie metod TBool jestGotowaDoKasowania() do CDoba, CRamkaCzas, CTaryfikator
+
+
+2003:04:19
+	- dodanie CDoba::usunNumerTaryfikatorow(const CNumer* aNumer) - usuwa odwo³ania do CNumer a nie sam CNumer - taryfikatory nie s¹ w³aœcicielami
+	- dodanie treœci do pustego prototypu CRamkaCzas::usunTaryfikator(CTaryfikator* aTaryfikator)
+	- zmiana wskaŸnika na const w CTaryfikator::usunNumer(const CNumer* aNumer)
+	- dodanie CPlanTaryf::usunNumer(CNumer* aNumer)
+	- dodanie CPlanTaryf::usunSwieto(TTime* aData)
+	- dodanie CDoba::usunBonusTaryfikatorow(const CBonus* aBonus)
+	- modyfikacja CTaryfikator::usunBonus() - zwi¹zana z przeskakiwaniem miejsca po usuniêtym elemencie
+
+2003:04:22
+	- usuniêcie tymczasowej statystyki w CPlanTaryf (zmienne iKosztXX) i zwi¹zanych z nimi metod: c'tor, _FILEstartLoad(), _DBMSprocessRecord()
+	- zmiana na now¹ statystykê (zmienne iStatXXX) i zwi¹zanych z nimi metod: c'tor,_DBMSstartUpdate,_DBMSprocessRecord
+
+2003:04:23
+	- modyfikacje CPlanTaryf (_FILEstartLoad i _DBMSaddLogData) zwi¹zane z wprowadzeniem limitów i nie uaktualnianiem event loga danymi testowymi w wersji demonstracyjnej wersji
+
+2003:05:18
+	- modyfikacje CBonus
+		a) dodana metoda SaveL()
+		b) modyfikacja pobierzBonusNazwa() pobierzBonusId() - zabezpieczania na brak ustalonych nazw
+		c) modyfikacja ustawBonusNazwaL() ustalaj¹ca tak¿e unikalne Id Bonusa w razie stwierdzenia jego braku
+2003:06:05
+	- poprawka CNumer::pobierzNumer() - zabezpieczaj¹ca przed krachem przy próbie pobrania nieistniej¹cego numeru
+
+2003:06:07
+	- modyfikacje metod SaveL() w klasach CBonus,CDoba,CRamka,CTaryfikator na modelowanie w RAM definicji
+	planu taryfowego do zapisu
+	- modyfikacje metody CTaryfikator::SaveL() - dla ostatniej jednostki taryfikacyjnej nie dodaje na si³ê '~' czyli 
+	okresu taryfikatora
+
+2003:06:08
+	- modyfikacje CPlanTaryf zwi¹zane z usuniêciem oddzielnego typu Doba Œwi¹teczna:
+	a) metody _constructPlanTaryf(), pobierzDzien(), c'tor,d'tor, jakiDzien()
+	- zmiany formatu pliku Plantaryf.txt (obecnie nazwa elog.txt):
+	a) nazwy dni brane z resource - opis po @ jest pomijany
+	b) taryfikator nie posiadaj¹cy ¿adnego dowi¹zanego numeru musi mieæ jakikolwiek jednowyrazowy wpis (domyœlnie <no_prefix>) gdy¿ kolejny taryfikator by³by nie do odró¿nienia
+	c) w zwi¹zku z pkt b) b³êdny numer jest pomijany a konstruowanie nie jest przerywane
+	d) w przypadku niekrytycznych braków ³adowanego planu taryfowego (brak taryfikatorów, brak numerów w taryfikatorach, brak ramek czasowych, puste ramki czasowe, brak dat œwi¹tecznych) konstruowanie jest kontynuowane
+	e) w przypadku b³êdów krytycznych (IO, z³y format godzin, brak definicji doby) system generuje Leave z KErrGeneral i porzuca wczytywany plan taryfowy
+
+2003:06:20
+	- zmiana CPlanTaryf::pobierzNumer() asercja zmieniona na zwrot NULL gdy poza zakresem
+
+2003:06:23
+	-dodanie CBonus::pobierzBonusWykorzystanie()
+
+2003:06:25
+	- zmiana CDoba::pobierzRamkeCzas(TInt aNrRamki) - wyrzucenie ASSERT i zwraca NULL jeœli próba pobrania nieistniej¹cej ramki
+
+2003:06:30
+	- nowa klasa CSMS - kontener dla taryfikatorów SMS'a (zarz¹dzanie, rozliczanie)
+
+2003:07:02
+	- modyfikacja CRamkaCzas::jestOdpowiedzialna() - modyfikacja warunku (prefix>max_prefix) po dodaniu obs³ugi pustego prefixu <all numbers>
+	- modyfikacja CPlanTaryf::_constructRamkaL() case ERamkaTaryfikatorNumer - po rozpoznaniu w pliku ELOG.TXT w miejscu spodziewanego numeru tel tokena <all_numbers> - dodawany jest link do numeru "" oznaczaj¹cego wszystkie numery
+
+2003:07:21
+	- nowa klasa CTaryfikatorZakladki bêd¹ca kontenerem CTaryfikator wyzwalanych w zale¿noœci od sumy czasów poprzednich rozmów (np <15 min; nastêpnie dla <45min,nastêpnie dla <120 min itp.) - patrz plan taryfowy ERA: Taka jak Ty
+ 	Modyfikacje CRamkaCzas:
+	a) dodana iAktualnaZakladka - akt. numer zak³adki taryfikatorów,wg tej wartoœci odpytywane obiekty CTaryfikatorZakladki bêd¹ zwraca³y odpowiedni CTaryfikator
+	b) zmiana iTaryfikatory<CTaryfikator> na <CTaryfikatorZakladki>
+	c) zmiana CRamkaCzas::pobierzTaryfikator() na zwracany taryfikator aktualnej zakladki
+	d) zmiana CRamkaCzas::dodajBonusRamki(), usunBonusRamki() - zamiast bezpoœredniej indeksacji iTaryfikatory[] mamy pobierzTaryfikator() z uwzgl. pktu c)
+	e) zmiana CRamkaCzas::dodajTaryfikatorL(),usunTaryfikator() - dodanie/usuwanie CTaryfikatorZakladki zamiast CTaryfikator
+	f) zmiana CRamkaCzas::dodajTaryfikatorL() - zwraca zbiór (zakladki) i poprzez ref. domyœlny taryfikator
+	g) zwi¹zana z w/w f) zmiana w CPlanTaryf::_constructRamkaL()
+	h) _test() - zwraca adres CTaryfikatorZakladki do której nale¿y b³êdna ramka
+
+	
+
